@@ -91,7 +91,6 @@ export default function Layout () {
         }, [user]);
         
 
-
         // function that takes an event object like input
         const handleFileChange = (e) => {
             // checks if event has file or if file is selected
