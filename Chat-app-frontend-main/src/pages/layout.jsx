@@ -162,10 +162,10 @@ export default function Layout () {
                     </Link>
                     
                     <div className="flex items-center gap-8 justify-center absolute right-72 left-0">
-                    <Link className="flex items-center gap-1 hover:underline" to="/dashboard">
+                    <Link className="flex items-center gap-1 hover:text-gray-200 text-pretty transition-colors" to="/dashboard">
                          <FaHome/> Home
                     </Link>
-                   <Link className="relative flex items-center gap-1 hover:underline" to="/chat">
+                   <Link className="relative flex items-center gap-1 hover:text-gray-200 text-pretty transition-colors" to="/chat">
                     <FaEnvelope /> Messages
                     {unreadMessages > 0 && (
                           <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">
@@ -174,7 +174,7 @@ export default function Layout () {
                      )}
                    </Link>
 
-                    <Link className="relative flex items-center gap-1 hover:underline" to="/notifications">
+                    <Link className="relative flex items-center gap-1 hover:text-gray-200 text-pretty transition-colors" to="/notifications">
                         <FaBell/> Notification
                         {unreadNotifications > 0 && (
                             <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">
