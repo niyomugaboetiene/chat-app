@@ -415,365 +415,363 @@ useEffect(() => {
 }, [selectedGroup]);
 
     return (
-        <div className="flex bg-gray-100 h-screen p-4"> {/* Added pt-20 for navbar space */}
-            {/* Left sidebar */}
-            <div className='fixed top-[70px] w-1/4 bg-white border-r border-gray-200 flex flex-col'>
-             <div className="">
-                <div className="p-4 border-b border-gray-200 bg-blue-50">
-                    <div className="flex items-center space-x-3">
-                        {myProfileImage ? (
-                            <img src={`http://localhost:4000/uploads/${myProfileImage}`} alt="Profile" 
-                                className='w-12 h-12 rounded-full object-cover shadow-md'/>
-                        ) : (
-                            <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-white text-xl font-bold shadow-md">
-                                {myName.charAt(0).toUpperCase()}
-                            </div>
-                        )}
+     <div className="flex h-screen ">
+  <div className="w-1/4 bg-white border-r border-gray-200 flex flex-col overflow-hidden">
+    <div className="shrink-0 p-4 border-b border-gray-200 bg-blue-50">
+      <div className="flex items-center space-x-3">
+        {myProfileImage ? (
+          <img src={`http://localhost:4000/uploads/${myProfileImage}`} alt="Profile" 
+            className="w-12 h-12 rounded-full object-cover shadow-md"/>
+        ) : (
+          <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-white text-xl font-bold shadow-md">
+            {myName.charAt(0).toUpperCase()}
+          </div>
+        )}
+        <div>
+          <h2 className="font-bold text-lg text-gray-800">{myName}</h2>
+          <p className="text-xs text-blue-600">Online</p>
+        </div>
+      </div>
+    </div>
 
-                        <div>
-                            <h2 className="font-bold text-lg text-gray-800">{myName}</h2>
-                            <p className="text-xs text-blue-600">Online</p>
-                        </div>
-                    </div>
-                </div>
+    <div className="shrink-0 p-2">
+      <button
+        onClick={() => navigate('/create-group')}
+        className="w-full bg-gradient-to-l from-blue-500 to-blue-300 via-purple-500 hover:scale-105 transition duration-200 text-white py-2 px-4 rounded-md flex items-center justify-center space-x-2"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
+        </svg>
+        <span>Create New Group</span>
+      </button>
+    </div>
 
-                <button
-                    onClick={() => navigate('/create-group')}
-                    className='w-full -ms-2 bg-gradient-to-l from-blue-500 to-blue-300 via-purple-500 hover:scale-105 transition duration-200 text-white py-2 px-4 rounded-md flex items-center justify-center space-x-2'
+    <div className="flex-1 overflow-y-auto">
+      <div>
+        <h3 className="px-4 py-3 text-sm font-semibold text-gray-500 bg-gray-50 sticky top-0 z-10">
+          GROUPS
+        </h3>
+        <div className="divide-y divide-gray-100">
+          {group.length === 0 && (
+            <p className="text-xs text-gray-400 px-4 py-2">No groups yet</p>
+          )}
+          {group.map(groupItem => (
+            <div 
+              className={`p-3 flex items-center space-x-3 hover:bg-gray-100 cursor-pointer ${selectedGroup?.g_id === groupItem.g_id ? 'bg-blue-100' : ''}`}
+              key={groupItem.g_id}
+              onClick={() => {
+                setSelectedUser(null);
+                setSelectedGroup(groupItem);
+              }}
+            >
+              {groupItem.group_photo ? (
+                <img src={`http://localhost:4000${groupItem.group_photo}`} alt="Group" 
+                  className="w-10 h-10 rounded-full object-cover shadow"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setShowDeleteMenuForGroup(showDeleteMenuForGroup === groupItem.g_id ? null : groupItem.g_id);
+                  }}/>
+              ) : (
+                <div className="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center text-white font-bold shadow"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setShowDeleteMenuForGroup(showDeleteMenuForGroup === groupItem.g_id ? null : groupItem.g_id);
+                  }}
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
-                    </svg>
-                    <span>Create New Group</span>
+                  {groupItem.group_name.charAt(0).toUpperCase()}
+                </div>
+              )}
+
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-gray-900 truncate">{groupItem.group_name}</p>
+                <p className="text-xs text-gray-500 truncate">Created by {groupItem.creator_name}</p>
+              </div>
+              {showDeleteMenuForGroup === groupItem.g_id && (
+                <button
+                  className="text-xs text-red-600 border border-red-600 px-2 py-0.5 rounded hover:bg-red-50"
+                  onClick={async (e) => {
+                    e.stopPropagation();
+                    try {
+                      await api.delete(`/api/groups/leave/${groupItem.g_id}`);
+                      const res = await api.get('/api/groups/my');
+                      setGroup(res.data);
+                      setShowDeleteMenuForGroup(null);
+                      if (selectedGroup?.g_id === groupItem.g_id) {
+                        setSelectedGroup(null);
+                        setGroupMessages([]);
+                      }
+                      alert('You left the group');
+                    } catch (error) {
+                      console.error('Failed to leave group', error);
+                      alert('Failed to leave the group');
+                    }
+                  }}
+                >
+                  Leave Group
+                </button>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <h3 className="px-4 py-3 text-sm font-semibold text-gray-500 bg-gray-50 sticky top-0 z-10">
+          CONTACTS
+        </h3>
+        <div className="divide-y divide-gray-100">
+          {allUsers.map(user => {
+            const isSelected = selectedUser === user.name;
+            const hasUnreadCount = unreadCount[user.name] > 0;
+
+            return (
+              <div 
+                key={user.user_id}
+                className={`p-3 flex items-center space-x-3 hover:bg-blue-100 cursor-pointer transition-colors duration-200 ${
+                  isSelected ? 'bg-blue-200' : ''
+                }`}
+                onClick={() => {
+                  setSelectedGroup(null);
+                  setSelectedUser(user.name);
+                }}
+              >
+                <div className="relative">
+                  {user.profile_image ? (
+                    <img src={`http://localhost:4000/uploads/${user.profile_image}`} alt={user.name} 
+                      className="w-10 h-10 rounded-full object-cover shadow"
+                    />
+                  ) : (
+                    <div className="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center text-white font-bold shadow">
+                      {user.name.charAt(0).toUpperCase()}
+                    </div>
+                  )}
+
+                  {user.user_id && onlineUsers.includes(user.user_id.toString()) && (
+                    <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></div>
+                  )}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className={`text-sm text-gray-800 truncate ${hasUnreadCount ? 'font-bold' : 'font-medium'}`}>
+                    {user.name}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div className="flex-1 flex flex-col overflow-hidden bg-white">
+    {selectedUser || selectedGroup ? (
+      <>
+        <div className="shrink-0 p-3 border-b border-gray-200 bg-white flex items-center space-x-3 shadow-sm">
+          <div className="relative">
+            {selectedUser && !selectedGroup ? (
+              (() => {
+                const user = allUsers.find(u => u.name === selectedUser);
+                if (user?.profile_image) {
+                  return (
+                    <img src={`http://localhost:4000/uploads/${user.profile_image}`} alt={selectedUser} 
+                      className="w-10 h-10 rounded-full object-cover shadow"
+                    />
+                  )
+                }
+                return (
+                  <div className="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center text-white font-bold shadow">
+                    {selectedUser.charAt(0).toUpperCase()}
+                  </div>
+                );
+              })()
+            ) : selectedGroup ? (
+              selectedGroup.group_photo ? (
+                <img src={`http://localhost:4000${selectedGroup.group_photo}`}
+                  alt={selectedGroup.group_name}
+                  className="w-10 h-10 rounded-full object-cover shadow cursor-pointer"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (selectedGroup.created_by === userId) {
+                      setShowDeleteMenu(prev => !prev);
+                    }
+                  }}
+                />
+              ) : (
+                <div
+                  className="w-10 h-10 bg-purple-600 flex items-center justify-center text-white font-bold shadow cursor-pointer rounded-full"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (selectedGroup.created_by === userId) {
+                      setShowDeleteMenu(prev => !prev);
+                    }
+                  }}
+                >
+                  {selectedGroup.group_name.charAt(0).toUpperCase()}
+                </div>
+              ) 
+            ) : null}
+            {showDeleteMenu && selectedGroup?.created_by === userId && (
+              <div className="absolute top-full mt-2 bg-white border rounded shadow-lg p-3 z-20 w-48 space-y-3">
+                <button
+                  className="w-full px-4 py-2 text-sm text-left text-gray-700 bg-gray-50 rounded-lg hover:text-blue-600 hover:bg-blue-50 transition-colors"
+                  onClick={() => navigate(`/changeGroupName/${selectedGroup.g_id}`)}
+                >
+                  Change group name
                 </button>
 
-                <h3 className="px-4 py-3 text-sm font-semibold text-gray-500 bg-gray-50">GROUPS</h3>
-                <div className='divide-y divide-gray-100'>
-                    {group.length === 0 && (
-                        <p className="text-xs text-gray-400 px-4 py-2">No groups yet</p>
-                    )}
-                    {group.map(groupItem => (
-                        <div 
-                            className={`p-3 flex items-center space-x-3 hover:bg-gray-100 cursor-pointer ${selectedGroup?.g_id === groupItem.g_id ? 'bg-blue-100' : ''}`} 
-                            key={groupItem.g_id}
-                            onClick={() => {
-                                setSelectedUser(null);
-                                setSelectedGroup(groupItem);
-                            }}
-                        >
-                            {groupItem.group_photo ? (
-                                <img src={`http://localhost:4000${groupItem.group_photo}`} alt="Group" 
-                                    className="w-10 h-10 rounded-full object-cover shadow"
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        setShowDeleteMenuForGroup(showDeleteMenuForGroup === groupItem.g_id ? null : groupItem.g_id);
-                                    }}/>
-                            ) : (
-                                <div className='w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center text-white font-bold shadow'
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        setShowDeleteMenuForGroup(showDeleteMenuForGroup === groupItem.g_id ? null : groupItem.g_id);
-                                    }}
-                                >
-                                    {groupItem.group_name.charAt(0).toUpperCase()}
-                                </div>
-                            )}
+                <button
+                  className="w-full px-4 py-2 text-sm text-left text-gray-700 bg-gray-50 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                  onClick={() => navigate(`/changeGroupPhoto/${selectedGroup.g_id}`)}
+                >
+                  Change group photo
+                </button>
+    
+                <button
+                  className="w-full px-4 py-2 text-sm text-left text-red-600 bg-red-50 rounded-lg hover:bg-red-100 hover:text-red-700 transition-colors"
+                  onClick={handleDeleteGroup}
+                >
+                  Delete Group
+                </button>
+              </div>
+            )}
+          </div>
+          <div className="flex-1">
+            <h3 className="font-semibold text-gray-900">
+              {selectedUser || selectedGroup?.group_name}
+            </h3>
+            {selectedGroup && (
+              <button 
+                className="text-xs text-blue-600 border border-blue-600 px-2 py-0.5 rounded hover:bg-blue-50"
+                onClick={() => navigate(`/group-members/${selectedGroup.g_id}`)}
+              >
+                View Members
+              </button>
+            )}
 
-                            <div className='flex-1 min-w-0'>
-                                <p className="text-sm font-medium text-gray-900 truncate">{groupItem.group_name}</p>
-                                <p className="text-xs text-gray-500 truncate">Created by {groupItem.creator_name}</p>
-                            </div>
-                            {showDeleteMenuForGroup === groupItem.g_id && (
-                                <button
-                                    className='text-xs text-red-600 border border-red-600 px-2 py-0.5 rounded hover:bg-red-50'
-                                    onClick={async (e) => {
-                                        e.stopPropagation();
-                                        try {
-                                            await api.delete(`/api/groups/leave/${groupItem.g_id}`);
-                                            const res = await api.get('/api/groups/my');
-                                            setGroup(res.data);
-                                            setShowDeleteMenuForGroup(null);
-                                            if (selectedGroup?.g_id === groupItem.g_id) {
-                                                setSelectedGroup(null);
-                                                setGroupMessages([]);
-                                            }
-                                            alert('You left the group');
-                                        } catch (error) {
-                                            console.error('Failed to leave group', error);
-                                            alert('Failed to leave the group');
-                                        }
-                                    }}
-                                >
-                                    Leave Group
-                                </button>
-                            )}
-                        </div>
-                    ))}
-                </div>
+            {selectedUser ? (
+              <>
+                {(() => {
+                  const user = allUsers.find(u => u.name === selectedUser);
+                  const isOnline = user && user.user_id && onlineUsers.includes(user.user_id.toString());
 
-                <div className="flex-1 overflow-y-auto">
-                    <h3 className="px-4 py-3 text-sm font-semibold text-gray-500 bg-gray-50 sticky top-0 z-10">
-                        CONTACTS
-                    </h3>
-                    <div className="divide-y divide-gray-100">
-                        {allUsers.map(user => {
-                            const isSelected = selectedUser === user.name;
-                            const hasUnreadCount = unreadCount[user.name] > 0;
-
-                            return (
-                                <div 
-                                    key={user.user_id}
-                                    className={`p-3 flex items-center space-x-3 hover:bg-blue-100 cursor-pointer transition-colors duration-200 ${
-                                        isSelected ? 'bg-blue-200' : ''
-                                    }`}
-                                    onClick={() => {
-                                        setSelectedGroup(null);
-                                        setSelectedUser(user.name);
-                                    }}
-                                >
-                                    <div className="relative">
-                                        {user.profile_image ? (
-                                            <img src={`http://localhost:4000/uploads/${user.profile_image}`} alt={user.name} 
-                                                className="w-10 h-10 rounded-full object-cover shadow"
-                                            />
-                                        ) : (
-                                            <div className="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center text-white font-bold shadow">
-                                                {user.name.charAt(0).toUpperCase()}
-                                            </div>
-                                        )}
-
-                                        {user.user_id && onlineUsers.includes(user.user_id.toString()) && (
-                                            <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></div>
-                                        )}
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                        <p className={`text-sm text-gray-800 truncate ${hasUnreadCount ? 'font-bold' : 'font-medium'}`}>
-                                            {user.name}
-                                        </p>
-                                    </div>
-                                </div>
-                            );
-                        })}
-                    </div>
-                </div>
-            </div>
-            </div>
-          
-            {/* Main chat area */}
-            <div className="flex-1 flex flex-col bg-white">
-                {selectedUser || selectedGroup ? (
-                    <>                    
-                        <div className="p-3 border-b border-gray-200 bg-white flex items-center space-x-3 shadow-sm">
-                            <div className="">
-                                {selectedUser && !selectedGroup ? (
-                                    (() => {
-                                        const user = allUsers.find(u => u.name === selectedUser);
-                                        if (user?.profile_image) {
-                                            return (
-                                                <img src={`http://localhost:4000/uploads/${user.profile_image}`} alt={selectedUser} 
-                                                    className="w-10 h-10 rounded-full object-cover shadow"
-                                                />
-                                            )
-                                        }
-                                        return (
-                                            <div className="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center text-white font-bold shadow">
-                                                {selectedUser.charAt(0).toUpperCase()}
-                                            </div>
-                                        );
-                                    })()
-                                ) : selectedGroup ? (
-                                    selectedGroup.group_photo ? (
-                                        <img src={`http://localhost:4000${selectedGroup.group_photo}`}
-                                            alt={selectedGroup.group_name}
-                                            className="w-10 h-10 rounded-full object-cover shadow cursor-pointer"
-                                            onClick={(e) => {
-                                                e.stopPropagation();
-                                                if (selectedGroup.created_by === userId) {
-                                                    setShowDeleteMenu(prev => !prev);
-                                                }
-                                            }}
-                                        />
-                                    ) : (
-                                        <div
-                                            className="w-10 h-10 bg-purple-600 flex items-center justify-center text-white font-bold shadow cursor-pointer rounded-full"
-                                            onClick={(e) => {
-                                                e.stopPropagation();
-                                                if (selectedGroup.created_by === userId) {
-                                                    setShowDeleteMenu(prev => !prev);
-                                                }
-                                            }}
-                                        >
-                                            {selectedGroup.group_name.charAt(0).toUpperCase()}
-                                        </div>
-                                    ) 
-                                ) : null}
-                                {showDeleteMenu && selectedGroup?.created_by === userId && (
-                                    <div className="absolute top-full mt-2 bg-white border rounded shadow-lg p-3 z-20 w-48 space-y-3">
-                                        <button
-                                            className='w-full px-4 py-2 text-sm text-left text-gray-700 bg-gray-50 rounded-lg hover:text-blue-600 hover:bg-blue-50 transition-colors'
-                                            onClick={() => navigate(`/changeGroupName/${selectedGroup.g_id}`)}
-                                        >
-                                            Change group name
-                                        </button>
-
-                                        <button
-                                            className='w-full px-4 py-2 text-sm text-left text-gray-700 bg-gray-50 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors'
-                                            onClick={() => navigate(`/changeGroupPhoto/${selectedGroup.g_id}`)}
-                                        >
-                                            Change group photo
-                                        </button>
-                            
-                                        <button
-                                            className='w-full px-4 py-2 text-sm text-left text-red-600 bg-red-50 rounded-lg hover:bg-red-100 hover:text-red-700 transition-colors'
-                                            onClick={handleDeleteGroup}
-                                        >
-                                            Delete Group
-                                        </button>
-                                    </div>
-                                )}
-                            </div>
-                            <div className="flex-1">
-                                <h3 className="font-semibold text-gray-900">
-                                    {selectedUser || selectedGroup?.group_name}
-                                </h3>
-                                {selectedGroup && (
-                                    <button 
-                                        className='text-xs text-blue-600 border border-blue-600 px-2 py-0.5 rounded hover:bg-blue-50'
-                                        onClick={() => navigate(`/group-members/${selectedGroup.g_id}`)}
-                                    >
-                                        View Members
-                                    </button>
-                                )}
-
-                                {selectedUser ? (
-                                    <>
-                                        {(() => {
-                                            const user = allUsers.find(u => u.name === selectedUser);
-                                            const isOnline = user && user.user_id && onlineUsers.includes(user.user_id.toString());
-
-                                            return (
-                                                <p className={`text-xs ${
-                                                    isOnline ? 'text-green-600' : 'text-gray-500'
-                                                }`}
-                                                >
-                                                    {isOnline ? 'Online' : 'Offline'}
-                                                </p>
-                                            );
-                                        })()}
-                                    </>
-                                ) : (
-                                    <p className="text-xs text-gray-500">Group</p>
-                                )}
-                            </div>
-                        </div>
-
-                        <div className="flex-1 min-h-0"> 
-                            <div 
-                                ref={messagesContainerRef}
-                                className="h-full overflow-y-auto p-4 bg-gray-50"
-                            >
-                                <div className="space-y-3">
-                                    {(selectedGroup ? groupMessages : messages).map((msg, i) => (
-                                        <div
-                                            key={i}
-                                            className={`flex ${msg.sender_name === myName ? 'justify-end' : 'justify-start'}`}
-                                        >
-                                            <div
-                                                className={`group relative max-w-xs lg:max-w-md px-4 py-2 rounded-2xl shadow-sm ${
-                                                    msg.sender_name === myName
-                                                        ? 'bg-blue-600 text-white rounded-br-none'
-                                                        : 'bg-white text-gray-800 border border-gray-200 rounded-bl-none'
-                                                }`}
-                                            >
-                                                {msg.sender_name !== myName && (
-                                                    <p className="text-xs font-semibold text-blue-600 mb-1">{msg.sender_name}</p>
-                                                )}
-
-                                                <p className="text-sm">{msg.content}</p>
-                                                <p className={`text-xs mt-1 ${
-                                                    msg.sender_name === myName ? 'text-blue-100' : 'text-gray-500'
-                                                }`}>
-                                                    <div className='text-[10px] mt-1 text-right'>
-                                                        {formatTimeStamp(msg.created_at)}
-                                                    </div>
-                                                </p>
-                                                
-                                                {selectedGroup && msg.sender_name === myName && (
-                                                    <button
-                                                        onClick={() => handleDeleteGroupMessage(msg.id)}
-                                                        title='Delete message'
-                                                        className='absolute -top-2 -right-2 text-red-500 opacity-0 group-hover:opacity-100 hover:text-red-700 transition'
-                                                    >
-                                                        <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                                        </svg>
-                                                    </button>
-                                                )}
-                                                {selectedUser && msg.sender_name === myName && msg.m_id && (
-                                                    <button
-                                                        onClick={() => handleDeletePrivateMessage(msg.m_id)}
-                                                        title='Delete private message'
-                                                        className='absolute -top-2 -right-2 text-red-500 opacity-0 group-hover:opacity-100 hover:text-red-700 transition'
-                                                    >
-                                                        <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                                        </svg>
-                                                    </button>
-                                                )}
-                                            </div>
-                                        </div>
-                                    ))}
-                                    <div ref={messagesEndRef} />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="shrink-0 p-4 border-t border-gray-200 bg-white shadow-sm">
-                            <form 
-                                onSubmit={(e) => {
-                                    e.preventDefault();
-                                    if (selectedGroup) {
-                                        sendGroupChatMessage();
-                                    } else {
-                                        sendMessage();
-                                    }
-                                }}
-                                className="flex space-x-2"
-                            >
-                                <input
-                                    type="text"
-                                    value={message}
-                                    onChange={(e) => setMessage(e.target.value)}
-                                    placeholder={`Message ${selectedUser || selectedGroup?.group_name}`}
-                                    className="flex-1 border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                />
-                                <button
-                                    type="submit"
-                                    disabled={!message.trim()}
-                                    className="bg-blue-600 text-white px-5 py-2 rounded-full hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors duration-200 shadow-sm"
-                                >
-                                    Send
-                                </button>
-                            </form>
-                        </div>
-                    </>
-                ) : (
-                    <div className="flex-1 flex flex-col items-center justify-center bg-gray-50 p-6">
-                        <div className="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                            </svg>
-                        </div>
-                        <h2 className="text-2xl font-bold text-gray-800 mb-2">Welcome to Chat</h2>
-                        <p className="text-gray-600 mb-6">Select a contact or group to start messaging</p>
-                        <div className="flex space-x-2">
-                            <div className="w-3 h-3 bg-blue-600 rounded-full animate-bounce"></div>
-                            <div className="w-3 h-3 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-                            <div className="w-3 h-3 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></div>
-                        </div>
-                    </div>
-                )}
-            </div>
+                  return (
+                    <p className={`text-xs ${
+                      isOnline ? 'text-green-600' : 'text-gray-500'
+                    }`}
+                    >
+                      {isOnline ? 'Online' : 'Offline'}
+                    </p>
+                  );
+                })()}
+              </>
+            ) : (
+              <p className="text-xs text-gray-500">Group</p>
+            )}
+          </div>
         </div>
+
+        <div className="flex-1 overflow-y-auto p-4 bg-gray-50">
+          <div className="space-y-3">
+            {(selectedGroup ? groupMessages : messages).map((msg, i) => (
+              <div
+                key={i}
+                className={`flex ${msg.sender_name === myName ? 'justify-end' : 'justify-start'}`}
+              >
+                <div
+                  className={`group relative max-w-xs lg:max-w-md px-4 py-2 rounded-2xl shadow-sm ${
+                    msg.sender_name === myName
+                      ? 'bg-blue-600 text-white rounded-br-none'
+                      : 'bg-white text-gray-800 border border-gray-200 rounded-bl-none'
+                  }`}
+                >
+                  {msg.sender_name !== myName && (
+                    <p className="text-xs font-semibold text-blue-600 mb-1">{msg.sender_name}</p>
+                  )}
+
+                  <p className="text-sm">{msg.content}</p>
+                  <p className={`text-xs mt-1 ${
+                    msg.sender_name === myName ? 'text-blue-100' : 'text-gray-500'
+                  }`}>
+                    <div className="text-[10px] mt-1 text-right">
+                      {formatTimeStamp(msg.created_at)}
+                    </div>
+                  </p>
+                  
+                  {selectedGroup && msg.sender_name === myName && (
+                    <button
+                      onClick={() => handleDeleteGroupMessage(msg.id)}
+                      title="Delete message"
+                      className="absolute -top-2 -right-2 text-red-500 opacity-0 group-hover:opacity-100 hover:text-red-700 transition"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                  )}
+                  {selectedUser && msg.sender_name === myName && msg.m_id && (
+                    <button
+                      onClick={() => handleDeletePrivateMessage(msg.m_id)}
+                      title="Delete private message"
+                      className="absolute -top-2 -right-2 text-red-500 opacity-0 group-hover:opacity-100 hover:text-red-700 transition"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                  )}
+                </div>
+              </div>
+            ))}
+            <div ref={messagesEndRef} />
+          </div>
+        </div>
+
+        <div className="shrink-0 p-4 border-t border-gray-200 bg-white shadow-sm">
+          <form 
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (selectedGroup) {
+                sendGroupChatMessage();
+              } else {
+                sendMessage();
+              }
+            }}
+            className="flex space-x-2"
+          >
+            <input
+              type="text"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder={`Message ${selectedUser || selectedGroup?.group_name}`}
+              className="flex-1 border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+            <button
+              type="submit"
+              disabled={!message.trim()}
+              className="bg-blue-600 text-white px-5 py-2 rounded-full hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors duration-200 shadow-sm"
+            >
+              Send
+            </button>
+          </form>
+        </div>
+      </>
+    ) : (
+      <div className="flex-1 flex flex-col items-center justify-center bg-gray-50 p-6">
+        <div className="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+          </svg>
+        </div>
+        <h2 className="text-2xl font-bold text-gray-800 mb-2">Welcome to Chat</h2>
+        <p className="text-gray-600 mb-6">Select a contact or group to start messaging</p>
+        <div className="flex space-x-2">
+          <div className="w-3 h-3 bg-blue-600 rounded-full animate-bounce"></div>
+          <div className="w-3 h-3 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+          <div className="w-3 h-3 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></div>
+        </div>
+      </div>
+    )}
+  </div>
+</div>
     );
 }
