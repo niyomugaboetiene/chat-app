@@ -247,7 +247,7 @@ export default function Layout () {
                 </div>
                )}
 
-            <div className="pt-20 flex-1 overflow-y-auto">
+            <div className="pt-16 flex-1 overflow-y-auto">
                <Outlet/>
            </div>
     </div>

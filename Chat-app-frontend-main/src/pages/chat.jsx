@@ -415,7 +415,7 @@ useEffect(() => {
 }, [selectedGroup]);
 
     return (
-        <div className="flex h-[calc(100vh-72px)] bg-gray-100 overflow-hidden p-4">
+        <div className="flex bg-gray-100 min-h-screen p-4">
             {/* Left sidebar */}
             <div className="w-1/4 bg-white border-r border-gray-200 flex flex-col">
                 <div className="p-4 border-b border-gray-200 bg-blue-50">
@@ -567,7 +567,7 @@ useEffect(() => {
             </div>
    
             {/* Main chat area */}
-            <div className="flex-1 flex flex-col bg-white py-4">
+            <div className="flex-1 flex flex-col bg-white">
                 
                 {selectedUser || selectedGroup ? (
                     <>                    
@@ -680,7 +680,8 @@ useEffect(() => {
                             </div>
                         </div>
 
-                        <div ref={messagesContainerRef} className="flex-1 overflow-y-auto p-4 bg-gray-50">
+                        <div className='flex-1 overflow-hidden relative'>
+                         <div ref={messagesContainerRef} className="flex-1 overflow-y-auto p-4 bg-gray-50">
                             <div className="space-y-3">
                                 {(selectedGroup ? groupMessages : messages).map((msg, i) => (
                                     <div
@@ -736,7 +737,7 @@ useEffect(() => {
                             </div>
                         </div>
 
-                        <div className="shrink-0 p-4 border-t border-gray-200 bg-white shadow-sm">
+                        <div className="absolute  bottom-0 top-[55%] w-full p-4 border-t border-gray-200 bg-white shadow-sm">
                             <form 
                                 onSubmit={(e) => {
                                     e.preventDefault();
@@ -763,6 +764,7 @@ useEffect(() => {
                                     Send
                                 </button>
                             </form>
+                        </div>
                         </div>
                     </>
                 ) : (
