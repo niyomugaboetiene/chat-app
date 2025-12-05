@@ -417,8 +417,8 @@ useEffect(() => {
     return (
         <div className="flex bg-gray-100 h-screen p-4"> {/* Added pt-20 for navbar space */}
             {/* Left sidebar */}
-            <div className='relative w-1/4 bg-white border-r border-gray-200 flex flex-col'>
-             <div className="top-0">
+            <div className='fixed top-[70px] w-1/4 bg-white border-r border-gray-200 flex flex-col'>
+             <div className="">
                 <div className="p-4 border-b border-gray-200 bg-blue-50">
                     <div className="flex items-center space-x-3">
                         {myProfileImage ? (
@@ -560,11 +560,11 @@ useEffect(() => {
             </div>
           
             {/* Main chat area */}
-            <div className="flex-1 flex flex-col bg-white">
+            <div className="flex-1  flex flex-col bg-white">
                 {selectedUser || selectedGroup ? (
                     <>                    
-                        <div className="shrink-0 p-3 border-b border-gray-200 bg-white flex items-center space-x-3 shadow-sm">
-                            <div className="relative">
+                        <div className="p-3 border-b border-gray-200 bg-white flex items-center space-x-3 shadow-sm">
+                            <div className="w-4/5 mx-auto">
                                 {selectedUser && !selectedGroup ? (
                                     (() => {
                                         const user = allUsers.find(u => u.name === selectedUser);
