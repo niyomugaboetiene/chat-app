@@ -529,8 +529,8 @@ useEffect(() => {
                             return (
                             <div 
                                 key={user.user_id}
-                                className={`p-3 flex items-center space-x-3 cursor-pointer transition-colors duration-200 ${
-                                    isSelected ? 'bg-gray-200' : ''
+                                className={`p-3 flex items-center space-x-3 hover:bg-blue-100 cursor-pointer transition-colors duration-200 ${
+                                    isSelected ? 'bg-blue-200' : ''
                                 }`}
                                 onClick={() => {
                                     setSelectedGroup(null);
