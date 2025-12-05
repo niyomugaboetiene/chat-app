@@ -415,7 +415,7 @@ useEffect(() => {
 }, [selectedGroup]);
 
     return (
-        <div className="flex h-screen bg-gray-100 overflow-hidden -mt-20 p-4">
+        <div className="flex h-[calc(100vh-72px)] bg-gray-100 overflow-hidden p-4">
             {/* Left sidebar */}
             <div className="w-1/4 bg-white border-r border-gray-200 flex flex-col">
                 <div className="p-4 border-b border-gray-200 bg-blue-50">
@@ -567,7 +567,7 @@ useEffect(() => {
             </div>
    
             {/* Main chat area */}
-            <div className="flex-1 flex flex-col bg-white">
+            <div className="flex-1 flex flex-col bg-white py-4">
                 
                 {selectedUser || selectedGroup ? (
                     <>                    
