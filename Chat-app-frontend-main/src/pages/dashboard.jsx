@@ -237,7 +237,7 @@ const handleSettingSubmit = async (e) => {
   <div>
 <button
   onClick={() => setShowSettingModal(true)}
-  className="flex items-center gap-2 rounded-2xl bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 text-sm font-medium shadow-md transition duration-200 mt-4"
+  className="flex items-center gap-2 rounded-2xl bg-gradient-to-l from-blue-500 to-blue-300 via-purple-500 hover:scale-105  text-white px-4 py-2 text-sm font-medium shadow-md transition duration-200 mt-4"
 >
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -286,15 +286,15 @@ const handleSettingSubmit = async (e) => {
                               onClick={() => setSelectedImage(`http://localhost:4000/uploads/${post.profile_image}`)}
                               className="w-10 h-10 rounded-full object-cover border shadow"/>
                         ) : (
-                            <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white text-lg font-semibold shadow">
+                            <div className="w-10 h-10  rounded-full bg-blue-600 flex items-center justify-center text-white text-lg font-semibold shadow">
                                 {post.name.charAt(0).toUpperCase()}
                             </div>
                         )}
                         <div>
-                            <p className="font-semibold text-gray-900">
+                            <p className="font-semibold text-gray-900 capitalize">
                               {post.name} <span className="font-semibold text-gray-600 text-sm">({post.role})</span>
                             </p>
-                           <span className="text-xs text-gray-500">
+                           <span className="text-xs text-gray-500 absolute right-[520px]">
                               {formatTimeStamp(post.created_at)}
                           </span>
                         </div> 
