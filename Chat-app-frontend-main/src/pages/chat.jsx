@@ -415,14 +415,15 @@ useEffect(() => {
 }, [selectedGroup]);
 
     return (
-        <div className="flex bg-gray-100 min-h-screen p-4">
+        <div className="flex bg-gray-100 h-screen p-4"> {/* Added pt-20 for navbar space */}
             {/* Left sidebar */}
-            <div className="w-1/4 bg-white border-r border-gray-200 flex flex-col">
+            <div className='relative w-1/4 bg-white border-r border-gray-200 flex flex-col'>
+             <div className="top-0">
                 <div className="p-4 border-b border-gray-200 bg-blue-50">
                     <div className="flex items-center space-x-3">
                         {myProfileImage ? (
                             <img src={`http://localhost:4000/uploads/${myProfileImage}`} alt="Profile" 
-                              className='w-12 h-12 rounded-full object-cover shadow-md'/>
+                                className='w-12 h-12 rounded-full object-cover shadow-md'/>
                         ) : (
                             <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-white text-xl font-bold shadow-md">
                                 {myName.charAt(0).toUpperCase()}
@@ -451,51 +452,48 @@ useEffect(() => {
                     {group.length === 0 && (
                         <p className="text-xs text-gray-400 px-4 py-2">No groups yet</p>
                     )}
-                    {group.map(group => (
+                    {group.map(groupItem => (
                         <div 
-                            className={`p-3 flex items-center space-x-3 hover:bg-gray-100 cursor-pointer ${selectedGroup?.g_id === group.g_id ? 'bg-blue-100' : ''}`} 
-                            key={group.g_id}
+                            className={`p-3 flex items-center space-x-3 hover:bg-gray-100 cursor-pointer ${selectedGroup?.g_id === groupItem.g_id ? 'bg-blue-100' : ''}`} 
+                            key={groupItem.g_id}
                             onClick={() => {
                                 setSelectedUser(null);
-                                setSelectedGroup(group);
+                                setSelectedGroup(groupItem);
                             }}
                         >
-                        
-    
-                        {group.group_photo ? (
-
-                            <img src={`http://localhost:4000${group.group_photo}`} alt="Group" 
-                             className="w-10 h-10 rounded-full object-cover shadow"
-                             onClick={(e) => {
-                                    e.stopPropagation();
-                                    setShowDeleteMenuForGroup(showDeleteMenuForGroup === group.g_id ? null : group.g_id);
-                                }}/>
-                        ) : (
-                            <div className='w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center text-white font-bold shadow'
-                              onClick={(e) => {
-                                    e.stopPropagation();
-                                    setShowDeleteMenuForGroup(showDeleteMenuForGroup === group.g_id ? null : group.g_id);
-                                }}
-                            >
-                                   {group.group_name.charAt(0).toUpperCase()}
-                            </div>
-                        )}
+                            {groupItem.group_photo ? (
+                                <img src={`http://localhost:4000${groupItem.group_photo}`} alt="Group" 
+                                    className="w-10 h-10 rounded-full object-cover shadow"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        setShowDeleteMenuForGroup(showDeleteMenuForGroup === groupItem.g_id ? null : groupItem.g_id);
+                                    }}/>
+                            ) : (
+                                <div className='w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center text-white font-bold shadow'
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        setShowDeleteMenuForGroup(showDeleteMenuForGroup === groupItem.g_id ? null : groupItem.g_id);
+                                    }}
+                                >
+                                    {groupItem.group_name.charAt(0).toUpperCase()}
+                                </div>
+                            )}
 
                             <div className='flex-1 min-w-0'>
-                                <p className="text-sm font-medium text-gray-900 truncate">{group.group_name}</p>
-                                <p className="text-xs text-gray-500 truncate">Created by {group.creator_name}</p>
+                                <p className="text-sm font-medium text-gray-900 truncate">{groupItem.group_name}</p>
+                                <p className="text-xs text-gray-500 truncate">Created by {groupItem.creator_name}</p>
                             </div>
-                            {showDeleteMenuForGroup === group.g_id && (
+                            {showDeleteMenuForGroup === groupItem.g_id && (
                                 <button
                                     className='text-xs text-red-600 border border-red-600 px-2 py-0.5 rounded hover:bg-red-50'
                                     onClick={async (e) => {
                                         e.stopPropagation();
                                         try {
-                                            await api.delete(`/api/groups/leave/${group.g_id}`);
+                                            await api.delete(`/api/groups/leave/${groupItem.g_id}`);
                                             const res = await api.get('/api/groups/my');
                                             setGroup(res.data);
                                             setShowDeleteMenuForGroup(null);
-                                            if (selectedGroup?.g_id === group.g_id) {
+                                            if (selectedGroup?.g_id === groupItem.g_id) {
                                                 setSelectedGroup(null);
                                                 setGroupMessages([]);
                                             }
@@ -522,66 +520,58 @@ useEffect(() => {
                             const isSelected = selectedUser === user.name;
                             const hasUnreadCount = unreadCount[user.name] > 0;
 
-                            console.log("Unread Count Object:", unreadCount);
-                            console.log(`User: ${user.name}, hasUnread: ${hasUnreadCount}`); // for debugging
-
-
                             return (
-                            <div 
-                                key={user.user_id}
-                                className={`p-3 flex items-center space-x-3 hover:bg-blue-100 cursor-pointer transition-colors duration-200 ${
-                                    isSelected ? 'bg-blue-200' : ''
-                                }`}
-                                onClick={() => {
-                                    setSelectedGroup(null);
-                                    setSelectedUser(user.name);
-                                }}
-                            >
+                                <div 
+                                    key={user.user_id}
+                                    className={`p-3 flex items-center space-x-3 hover:bg-blue-100 cursor-pointer transition-colors duration-200 ${
+                                        isSelected ? 'bg-blue-200' : ''
+                                    }`}
+                                    onClick={() => {
+                                        setSelectedGroup(null);
+                                        setSelectedUser(user.name);
+                                    }}
+                                >
+                                    <div className="relative">
+                                        {user.profile_image ? (
+                                            <img src={`http://localhost:4000/uploads/${user.profile_image}`} alt={user.name} 
+                                                className="w-10 h-10 rounded-full object-cover shadow"
+                                            />
+                                        ) : (
+                                            <div className="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center text-white font-bold shadow">
+                                                {user.name.charAt(0).toUpperCase()}
+                                            </div>
+                                        )}
 
-                                <div className="relative">
-                                    {user.profile_image ? (
-                                        <img src={`http://localhost:4000/uploads/${user.profile_image}`} alt={user.name} 
-                                           className="w-10 h-10 rounded-full object-cover shadow"
-                                        />
-                                    ) : (
-                                     <div className="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center text-white font-bold shadow">
-                                         {user.name.charAt(0).toUpperCase()}
+                                        {user.user_id && onlineUsers.includes(user.user_id.toString()) && (
+                                            <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></div>
+                                        )}
                                     </div>
-                                    )}
-
-                                    {user.user_id && onlineUsers.includes(user.user_id.toString()) && (
-                                        <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></div>
-                                    )}
+                                    <div className="flex-1 min-w-0">
+                                        <p className={`text-sm text-gray-800 truncate ${hasUnreadCount ? 'font-bold' : 'font-medium'}`}>
+                                            {user.name}
+                                        </p>
+                                    </div>
                                 </div>
-                                <div className="flex-1 min-w-0">
-                                    <p className={`text-sm text-gray-800 truncate ${hasUnreadCount ? 'font-bold' : 'font-medum'}`}>
-                                          {user.name}
-                                    </p>
-     
-                                </div>
-                            </div>
-                            
-                        )})}
+                            );
+                        })}
                     </div>
                 </div>
             </div>
-   
+            </div>
+          
             {/* Main chat area */}
             <div className="flex-1 flex flex-col bg-white">
-                
                 {selectedUser || selectedGroup ? (
                     <>                    
                         <div className="shrink-0 p-3 border-b border-gray-200 bg-white flex items-center space-x-3 shadow-sm">
                             <div className="relative">
-                                
                                 {selectedUser && !selectedGroup ? (
                                     (() => {
-                                        const user = allUsers.find(u => u.name === selectedUser)
-
+                                        const user = allUsers.find(u => u.name === selectedUser);
                                         if (user?.profile_image) {
                                             return (
                                                 <img src={`http://localhost:4000/uploads/${user.profile_image}`} alt={selectedUser} 
-                                                     className="w-10 h-10 rounded-full object-cover shadow"
+                                                    className="w-10 h-10 rounded-full object-cover shadow"
                                                 />
                                             )
                                         }
@@ -594,48 +584,46 @@ useEffect(() => {
                                 ) : selectedGroup ? (
                                     selectedGroup.group_photo ? (
                                         <img src={`http://localhost:4000${selectedGroup.group_photo}`}
-                                           alt={selectedGroup.group_name}
-                                           className="w-10 h-10 rounded-full object-cover shadow cursor-pointer"
-                                                   onClick={(e) => {
-                                                     e.stopPropagation();
-                                                      if (selectedGroup.created_by === userId) {
-                                                          setShowDeleteMenu(prev => !prev);
-                                                      }
-                                                    }}
+                                            alt={selectedGroup.group_name}
+                                            className="w-10 h-10 rounded-full object-cover shadow cursor-pointer"
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                if (selectedGroup.created_by === userId) {
+                                                    setShowDeleteMenu(prev => !prev);
+                                                }
+                                            }}
                                         />
                                     ) : (
                                         <div
-                                             className="w-10 h-10 bg-purple-600 flex items-center justify-center text-white font-bold shadow cursor-pointer rounded-full"
-                                             onClick={(e) => {
+                                            className="w-10 h-10 bg-purple-600 flex items-center justify-center text-white font-bold shadow cursor-pointer rounded-full"
+                                            onClick={(e) => {
                                                 e.stopPropagation();
                                                 if (selectedGroup.created_by === userId) {
-                                                     setShowDeleteMenu(prev => !prev);
+                                                    setShowDeleteMenu(prev => !prev);
                                                 }
-                                             }}
+                                            }}
                                         >
-                                          {selectedGroup.group_name.charAt(0).toUpperCase()}
+                                            {selectedGroup.group_name.charAt(0).toUpperCase()}
                                         </div>
                                     ) 
                                 ) : null}
-                                {showDeleteMenu && selectedGroup?.created_by === userId
-                                 && (
+                                {showDeleteMenu && selectedGroup?.created_by === userId && (
                                     <div className="absolute top-full mt-2 bg-white border rounded shadow-lg p-3 z-20 w-48 space-y-3">
-                
                                         <button
                                             className='w-full px-4 py-2 text-sm text-left text-gray-700 bg-gray-50 rounded-lg hover:text-blue-600 hover:bg-blue-50 transition-colors'
                                             onClick={() => navigate(`/changeGroupName/${selectedGroup.g_id}`)}
                                         >
-                                          Change group name
+                                            Change group name
                                         </button>
 
                                         <button
                                             className='w-full px-4 py-2 text-sm text-left text-gray-700 bg-gray-50 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors'
                                             onClick={() => navigate(`/changeGroupPhoto/${selectedGroup.g_id}`)}
                                         >
-                                          Change group photo
+                                            Change group photo
                                         </button>
                             
-                                       <button
+                                        <button
                                             className='w-full px-4 py-2 text-sm text-left text-red-600 bg-red-50 rounded-lg hover:bg-red-100 hover:text-red-700 transition-colors'
                                             onClick={handleDeleteGroup}
                                         >
@@ -658,86 +646,91 @@ useEffect(() => {
                                 )}
 
                                 {selectedUser ? (
-                                 <>
-                                   {(() => {
-                                    const user = allUsers.find(u => u.name === selectedUser);
-                                    const isOnline = user && user.user_id && onlineUsers.includes(user.user_id.toString());
+                                    <>
+                                        {(() => {
+                                            const user = allUsers.find(u => u.name === selectedUser);
+                                            const isOnline = user && user.user_id && onlineUsers.includes(user.user_id.toString());
 
-                                    return (
-                                      <p className={`text-xs ${
-                                          isOnline ? 'text-green-600' : 'text-gray-500'
-                                       }`}
-                                    >
-                                          {isOnline ? 'Online' : 'Offline'}
-                                    </p>
-                                    );
-                                   })()}
-
-                                </>
+                                            return (
+                                                <p className={`text-xs ${
+                                                    isOnline ? 'text-green-600' : 'text-gray-500'
+                                                }`}
+                                                >
+                                                    {isOnline ? 'Online' : 'Offline'}
+                                                </p>
+                                            );
+                                        })()}
+                                    </>
                                 ) : (
                                     <p className="text-xs text-gray-500">Group</p>
                                 )}
                             </div>
                         </div>
 
-                        <div className='flex-1 overflow-hidden relative'>
-                         <div ref={messagesContainerRef} className="flex-1 overflow-y-auto p-4 bg-gray-50">
-                            <div className="space-y-3">
-                                {(selectedGroup ? groupMessages : messages).map((msg, i) => (
-                                    <div
-                                        key={i}
-                                        className={`flex ${msg.sender_name === myName ? 'justify-end' : 'justify-start'}`}
-                                    >
+                        {/* FIXED: Messages container with proper height management */}
+                        <div className="flex-1 min-h-0"> {/* Added min-h-0 for proper flex child */}
+                            <div 
+                                ref={messagesContainerRef}
+                                className="h-full overflow-y-auto p-4 bg-gray-50"
+                            >
+                                <div className="space-y-3">
+                                    {(selectedGroup ? groupMessages : messages).map((msg, i) => (
                                         <div
-                                            className={`group relative max-w-xs lg:max-w-md px-4 py-2 rounded-2xl shadow-sm ${
-                                                msg.sender_name === myName
-                                                    ? 'bg-blue-600 text-white rounded-br-none'
-                                                    : 'bg-white text-gray-800 border border-gray-200 rounded-bl-none'
-                                            }`}
+                                            key={i}
+                                            className={`flex ${msg.sender_name === myName ? 'justify-end' : 'justify-start'}`}
                                         >
-                                            {msg.sender_name !== myName && (
-                                                <p className="text-xs font-semibold text-blue-600 mb-1">{msg.sender_name}</p>
-                                            )}
+                                            <div
+                                                className={`group relative max-w-xs lg:max-w-md px-4 py-2 rounded-2xl shadow-sm ${
+                                                    msg.sender_name === myName
+                                                        ? 'bg-blue-600 text-white rounded-br-none'
+                                                        : 'bg-white text-gray-800 border border-gray-200 rounded-bl-none'
+                                                }`}
+                                            >
+                                                {msg.sender_name !== myName && (
+                                                    <p className="text-xs font-semibold text-blue-600 mb-1">{msg.sender_name}</p>
+                                                )}
 
-                                            <p className="text-sm">{msg.content}</p>
-                                            <p className={`text-xs mt-1 ${
-                                                msg.sender_name === myName ? 'text-blue-100' : 'text-gray-500'
-                                            }`}>
-                                                <div className='text-[10px]  mt-1 text-right'>
+                                                <p className="text-sm">{msg.content}</p>
+                                                <p className={`text-xs mt-1 ${
+                                                    msg.sender_name === myName ? 'text-blue-100' : 'text-gray-500'
+                                                }`}>
+                                                    <div className='text-[10px] mt-1 text-right'>
                                                         {formatTimeStamp(msg.created_at)}
-                                                </div>
-                                            </p>
-                                            
-                                            {selectedGroup && msg.sender_name === myName && (
-                                                <button
-                                                    onClick={() => handleDeleteGroupMessage(msg.id)}
-                                                    title='Delete message'
-                                                    className='absolute -top-2 -right-2 text-red-500 opacity-0 group-hover:opacity-100 hover:text-red-700 transition'
-                                                >
-                                                    <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                                    </svg>
-                                                </button>
-                                            )}
-                                            {selectedUser && msg.sender_name === myName && msg.m_id && (
-                                                <button
-                                                    onClick={() => handleDeletePrivateMessage(msg.m_id)}
-                                                    title='Delete private message'
-                                                    className='absolute -top-2 -right-2 text-red-500 opacity-0 group-hover:opacity-100 hover:text-red-700 transition'
-                                                >
-                                                    <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                                    </svg>
-                                                </button>
-                                            )}
+                                                    </div>
+                                                </p>
+                                                
+                                                {selectedGroup && msg.sender_name === myName && (
+                                                    <button
+                                                        onClick={() => handleDeleteGroupMessage(msg.id)}
+                                                        title='Delete message'
+                                                        className='absolute -top-2 -right-2 text-red-500 opacity-0 group-hover:opacity-100 hover:text-red-700 transition'
+                                                    >
+                                                        <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                                        </svg>
+                                                    </button>
+                                                )}
+                                                {selectedUser && msg.sender_name === myName && msg.m_id && (
+                                                    <button
+                                                        onClick={() => handleDeletePrivateMessage(msg.m_id)}
+                                                        title='Delete private message'
+                                                        className='absolute -top-2 -right-2 text-red-500 opacity-0 group-hover:opacity-100 hover:text-red-700 transition'
+                                                    >
+                                                        <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                                        </svg>
+                                                    </button>
+                                                )}
+                                            </div>
                                         </div>
-                                    </div>
-                                ))}
-                                <div ref={messagesEndRef} />
+                                    ))}
+                                    <div ref={messagesEndRef} />
+                                </div>
                             </div>
                         </div>
 
-                        <div className="absolute  bottom-0 top-[55%] w-full p-4 border-t border-gray-200 bg-white shadow-sm">
+                        {/* Input form - stays at bottom */}
+                        <div className="shrink-0 p-4 border-t border-gray-200 bg-white shadow-sm">
                             <form 
                                 onSubmit={(e) => {
                                     e.preventDefault();
@@ -764,7 +757,6 @@ useEffect(() => {
                                     Send
                                 </button>
                             </form>
-                        </div>
                         </div>
                     </>
                 ) : (

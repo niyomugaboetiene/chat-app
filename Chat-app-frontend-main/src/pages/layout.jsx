@@ -152,105 +152,102 @@ export default function Layout () {
 
 
         if (!user) return null;
-    return (
-          <div className="fixed top-0 left-0 right-0 z-50">
-               <nav className="flex justify-between items-center relative bg-gradient-to-l from-blue-500 to-blue-300 via-purple-500 text-white px-6 py-3 shadow">
         
-                <div className="flex gap-6 items-center">
-                    <Link to="/dashboard" className="flex items-center gap-2">
-                       <span className="text-lg font-bold tracking-wide text-white hidden sm:inline">School Chat</span>
-                    </Link>
-                    
-                    <div className="flex items-center gap-8 justify-center absolute right-72 left-0">
-                    <Link className="flex items-center gap-1 text-lg hover:text-gray-200 text-pretty transition-colors" to="/dashboard">
-                         <FaHome/> Home
-                    </Link>
-                   <Link className="relative flex items-center gap-1 text-lg hover:text-gray-200 text-pretty transition-colors" to="/chat">
-                    <FaEnvelope /> Messages
-                    {unreadMessages > 0 && (
-                          <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">
-                                   {unreadMessages}
-                           </span>
-                     )}
-                   </Link>
+    return (
+          <div>
+               {/* Fixed Navigation Bar */}
+               <div className="fixed top-0 left-0 right-0 z-50">
+                    <nav className="flex justify-between items-center relative bg-gradient-to-l from-blue-500 to-blue-300 via-purple-500 text-white px-6 py-3 shadow">
+                         <div className="flex gap-6 items-center">
+                              <Link to="/dashboard" className="flex items-center gap-2">
+                                   <span className="text-lg font-bold tracking-wide text-white hidden sm:inline">School Chat</span>
+                              </Link>
+                              
+                              <div className="flex items-center gap-8 justify-center absolute right-72 left-0">
+                                   <Link className="flex items-center gap-1 text-lg hover:text-gray-200 text-pretty transition-colors" to="/dashboard">
+                                        <FaHome/> Home
+                                   </Link>
+                                   <Link className="relative flex items-center gap-1 text-lg hover:text-gray-200 text-pretty transition-colors" to="/chat">
+                                        <FaEnvelope /> Messages
+                                        {unreadMessages > 0 && (
+                                             <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">
+                                                  {unreadMessages}
+                                             </span>
+                                        )}
+                                   </Link>
 
-                    <Link className="relative flex text-lg items-center gap-1 hover:text-gray-200 text-pretty transition-colors" to="/notifications">
-                        <FaBell/> Notification
-                        {unreadNotifications > 0 && (
-                            <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">
-                               {unreadNotifications}
-                            </span>
-                        )}
-                    </Link>
-                </div>
-        </div>
+                                   <Link className="relative flex text-lg items-center gap-1 hover:text-gray-200 text-pretty transition-colors" to="/notifications">
+                                        <FaBell/> Notification
+                                        {unreadNotifications > 0 && (
+                                             <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">
+                                                  {unreadNotifications}
+                                             </span>
+                                        )}
+                                   </Link>
+                              </div>
+                         </div>
 
-                
-                <button className="relative group bg-white text-blue-500 p-1 rounded-full
-                                  font-semibold flex items-center justify-center hover:ring-2 hover:ring-blue-400 transition-all duration-200"
-                    onClick={() => setShowUserMenu(!showUserMenu)}
-                >
-                    {profileImage ? (
-                        <>
-                           <img src={profileImage} 
-                             alt="Profile"
-                             className="w-10 h-10 rounded-full object-cover border-2 border-white shadow-md"
-                            />
+                         <button className="relative group bg-white text-blue-500 p-1 rounded-full
+                                             font-semibold flex items-center justify-center hover:ring-2 hover:ring-blue-400 transition-all duration-200"
+                                   onClick={() => setShowUserMenu(!showUserMenu)}
+                         >
+                              {profileImage ? (
+                                   <img src={profileImage} 
+                                        alt="Profile"
+                                        className="w-10 h-10 rounded-full object-cover border-2 border-white shadow-md"
+                                   />
+                              ) : (
+                                   <FaUserCircle className="text-3xl mb-1"/>
+                              )}
+                         </button>
+                    </nav>
 
-                        </>
+                    {showUserMenu && (
+                         <div className="absolute top-16 right-2 bg-white border border-gray-200 rounded-lg shadow-xl p-5 w-72 z-50">
+                              <div className="mt-2">
+                                   <h3 className="font-bold text-gray-800 text-lg mb-2">{user.name}</h3>
+                             
+                                   <p className="text-gray-700 mb-1"><span className="font-semibold text-gray-800">Phone: </span>{user.phone}</p>
+                                   <p className="text-gray-700"><span className="font-semibold text-gray-800">Role: </span>{user.role}</p>
+                              </div>
+                              <form onSubmit={handleProfilePhotoChange} className="mt-4">
+                                   <label className="block text-sm mb-2 font-medium text-gray-700 ">Change Profile photo</label>
+                                   <input type="file"
+                                        accept="image/*"
+                                        onChange={handleFileChange}
+                                        className="block w-full text-sm text-gray-600
+                                                   file:mr-4 file:py-2 file:px:4
+                                                   file:rounded-md file:border-0
+                                                   file:text-sm file:font-semibold
+                                                   file:bg-gray-100 file:text-gray-700
+                                                   file:hover:bg-gray-200 cursor-pointer mb-4"
+                                   />
 
-                    ) : (
-                        <FaUserCircle className="text-3xl mb-1"/>
+                                   <div className="space-y-3">
+                                        <button type="submit"
+                                             className="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700
+                                                         transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 text-sm font-semibold"
+                                        >
+                                             Upload
+                                        </button>
+                                        <button
+                                             type="button"
+                                             onClick={handleLogout}
+                                             className="w-full bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition-colors
+                                                         duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 text-sm font-semibold"
+                                        >
+                                             Logout
+                                        </button>  
+                                   </div>
+                              </form>
+                         </div>
                     )}
-                </button>
-               </nav>
+               </div>
 
-               {showUserMenu && (
-                <div className="absolute top-16 right-2 bg-white border border-gray-200 rounded-lg shadow-xl p-5 w-72 z-50">
-                    <div className="mt-2">
-                       <h3 className="font-bold text-gray-800 text-lg mb-2">{user.name}</h3>
-                 
-                       <p className="text-gray-700 mb-1"><span className="font-semibold text-gray-800">Phone: </span>{user.phone}</p>
-                       <p className="text-gray-700"><span className="font-semibold text-gray-800">Role: </span>{user.role}</p>
-                    </div>
-                    <form onSubmit={handleProfilePhotoChange} className="mt-4">
-                        <label className="block text-sm mb-2 font-medium text-gray-700 ">Change Profile photo</label>
-                        <input type="file"
-                           accept="image/*"
-                           onChange={handleFileChange}
-                           className="block w-full text-sm text-gray-600
-                                      file:mr-4 file:py-2 file:px:4
-                                      file:rounded-md file:border-0
-                                      file:text-sm file:font-semibold
-                                      file:bg-gray-100 file:text-gray-700
-                                      file:hover:bg-gray-200 cursor-pointer mb-4"
-                        />
-
-                   <div className="space-y-3">
-                        <button type="submit"
-                            className=" w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700
-                                        transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 text-sm font-semibold"
-                       >
-                                Upload
-                            </button>
-                         <button
-                         type="button"
-                           onClick={handleLogout}
-                           className="w-full bg-red-600 text-white px-4 py-2 rounded-md hover:red-700 transition-colors
-                                      duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 text-sm font-semibold"
-                        >
-                            Logout
-                        </button>  
-                   </div>
- 
-                    </form>
-                </div>
-               )}
-
-            <div className="pt-16 flex-1 overflow-y-auto">
-               <Outlet/>
-           </div>
-    </div>
+               {/* Main content area with padding for fixed nav */}
+               <div className="pt-36">
+                    <Outlet/>
+               </div>
+          </div>
     )
 }
-
