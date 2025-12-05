@@ -219,7 +219,6 @@ const handleSettingSubmit = async (e) => {
   </div> 
 
  
-  {/* User Info */}
   <div className="space-y-3 text-sm text-gray-700">
 
     <div className="flex flex-col items-start">
