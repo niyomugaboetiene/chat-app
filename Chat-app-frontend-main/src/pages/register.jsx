@@ -30,12 +30,13 @@ export default function Register() {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+            <div>
             <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
 
                 <div className="flex justify-center mb-6">
                     <img src={logo} alt="SchoolChat logo" className="h-32 w-auto"/>
                 </div>
-               <h2 className="text-xl font-bold text-center text-gray-800 mb-6">Create free account</h2>
+               <h2 className="text-xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-tr from-blue-500 to-blue-300 via-purple-500">Create free account</h2>
               {error && (
                   <div className="mb-4 bg-red-100 text-red-600 rounded-md text-sm">
                      {error}
@@ -70,15 +71,14 @@ export default function Register() {
                 required
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus::outline-none focus:ring-2 focus:ring-blue-500"
 
-                /> <br />   
-
-                <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-300">
+                />    
+                <button type="submit" className="bg-gradient-to-l from-blue-500 to-blue-300 via-purple-500 hover:scale-105  text-white font-semibold py-2 px-4 mb-5 rounded-lg transition duration-300">
                     Create Account
-                </button>  <br />      
-                <Link to="/" className="font-normal text-blue-500 hover:underline">Back to main login</Link>      
+                </button>  
             </form>
+            <Link to="/" className="font-normal text-blue-500 hover:underline">Back to main login</Link>      
             </div>
-
+            </div>
         </div>
     )
 }

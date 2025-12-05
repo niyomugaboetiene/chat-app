@@ -27,9 +27,10 @@ export default function Login() {
                   <div className="flex justify-center mb-6">
                               <img src={logo} alt="SchoolChat logo" className="h-32 w-auto"/>
                     </div>
-                   <h2 className="text-2xl font-bold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-t from-blue-500 to-purple-500 via-purple-500">
+                   <h2 className="text-2xl font-bold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-tr from-blue-500 to-blue-300 via-purple-500">
                          Login
-                  </h2>               {error &&
+                  </h2>
+                  {error &&
                    <div className="mb-4 p-3 bg-red-100 text-red-600 rounded-md text-sm">
                       {error}
                    </div>
@@ -60,7 +61,7 @@ export default function Login() {
                 </div>
 
                 <button type="submit"
-                   className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-300"
+                   className="bg-gradient-to-l from-blue-500 to-blue-300 via-purple-500 hover:scale-105 transition duration-200 text-white font-semibold py-2 px-4 rounded-lg transition duration-300"
                 >
                    Login
               </button> 
