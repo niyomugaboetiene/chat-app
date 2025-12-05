@@ -129,8 +129,8 @@ const handleSettingSubmit = async (e) => {
     if (!user) return <p className="text-center mt-10">Loading.....</p>
 
     return (
- <div className="min-h-screen flex ">
-<aside className="w-64 bg-white p-6 border-r border-gray-200 shadow-sm fixed top-16 left-0 bottom-0 z-10 overflow-y-auto">
+ <div className="min-h-screen flex -mt-20">
+<aside className="w-64 bg-white p-6 border-r border-gray-200 shadow-sm fixed top-20 left-0 bottom-0 z-10 overflow-y-auto">
 
     <h2 className="text-xl font-semibold text-gray-800 mb-6">My Profile</h2>
 
@@ -313,7 +313,7 @@ const handleSettingSubmit = async (e) => {
      })}
   </main>
 
-             <aside className="w-64 bg-gray-50 p-4 border-1 shadow-sm overflow-y-auto fixed top-16 right-0 h-full z-10">
+             <aside className="w-64 bg-gray-50 p-4 border-1 shadow-sm overflow-y-auto fixed top-20 right-0 h-full z-10">
                 <h2 className="text-lg font-bold mb-4 text-gray-700">All Users</h2>
                 <ul className="space-y-2">
                     {allUsers.map((u) => (

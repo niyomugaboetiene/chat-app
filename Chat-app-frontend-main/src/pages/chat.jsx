@@ -415,7 +415,7 @@ useEffect(() => {
 }, [selectedGroup]);
 
     return (
-        <div className="flex h-screen bg-gray-100 overflow-hidden">
+        <div className="flex h-screen bg-gray-100 overflow-hidden -mt-20 p-4">
             {/* Left sidebar */}
             <div className="w-1/4 bg-white border-r border-gray-200 flex flex-col">
                 <div className="p-4 border-b border-gray-200 bg-blue-50">
