@@ -171,7 +171,7 @@ export default function GroupMember() {
         setShowAddForm(true);
         await fetchAvailableUsers();
       }}
-      className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors shadow-md"
+      className="flex items-center gap-2 bg-gradient-to-l from-blue-500 to-blue-300 via-purple-500 hover:scale-105 transition duration-200 text-white px-4 py-2 rounded-lg shadow-md"
     >
       <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
         <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
@@ -252,7 +252,7 @@ export default function GroupMember() {
     ) : (
       <ul className="divide-y divide-gray-200 border border-gray-200 rounded-lg overflow-hidden shadow-sm">
     {members.map((member) => (
-<li className="p-4 hover:bg-gray-50 transition-colors flex items-center justify-between">
+<li className="p-4 hover:bg-blue-50 transition-colors flex items-center justify-between">
   <div className="flex items-center">
     <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-semibold mr-3">
       {member.name.charAt(0).toUpperCase()}
