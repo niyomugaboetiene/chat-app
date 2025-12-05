@@ -564,7 +564,7 @@ useEffect(() => {
                 {selectedUser || selectedGroup ? (
                     <>                    
                         <div className="p-3 border-b border-gray-200 bg-white flex items-center space-x-3 shadow-sm">
-                            <div className="w-4/5 mx-auto">
+                            <div className="">
                                 {selectedUser && !selectedGroup ? (
                                     (() => {
                                         const user = allUsers.find(u => u.name === selectedUser);
@@ -667,8 +667,7 @@ useEffect(() => {
                             </div>
                         </div>
 
-                        {/* FIXED: Messages container with proper height management */}
-                        <div className="flex-1 min-h-0"> {/* Added min-h-0 for proper flex child */}
+                        <div className="flex-1 min-h-0"> 
                             <div 
                                 ref={messagesContainerRef}
                                 className="h-full overflow-y-auto p-4 bg-gray-50"
@@ -729,7 +728,6 @@ useEffect(() => {
                             </div>
                         </div>
 
-                        {/* Input form - stays at bottom */}
                         <div className="shrink-0 p-4 border-t border-gray-200 bg-white shadow-sm">
                             <form 
                                 onSubmit={(e) => {
