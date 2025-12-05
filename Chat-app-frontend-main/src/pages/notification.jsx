@@ -75,7 +75,7 @@ export default function Notification () {
     }
 
     return (
-        <div className="p-3 border rounded-lg bg-white w-50">
+        <div className="p-5 border rounded-lg bg-white w-50 -mt-20">
             <h1 className="text-lg font-semibold mb-2">Notifications</h1>
 
             <ul>

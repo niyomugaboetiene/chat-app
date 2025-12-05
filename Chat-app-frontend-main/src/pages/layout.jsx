@@ -154,7 +154,7 @@ export default function Layout () {
         if (!user) return null;
     return (
           <div className="fixed top-0 left-0 right-0 z-50">
-               <nav className="flex justify-between items-center bg-blue-700 text-white px-6 py-3 shadow">
+               <nav className="flex justify-between items-center  bg-blue-700 text-white px-6 py-3 shadow">
         
                 <div className="flex gap-6 items-center">
                     <Link to="/dashboard" className="flex items-center gap-2">
