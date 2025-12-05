@@ -414,8 +414,8 @@ useEffect(() => {
     }
 }, [selectedGroup]);
 
-    return (
-     <div className="flex h-screen ">
+return (
+ <div className="flex h-screen ">
   <div className="w-1/4 bg-white border-r border-gray-200 flex flex-col overflow-hidden">
     <div className="shrink-0 p-4 border-b border-gray-200 bg-blue-50">
       <div className="flex items-center space-x-3">
