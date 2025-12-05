@@ -57,7 +57,7 @@ export default function CreateGroup () {
 
     return (
         <div className="max-w-xl mx-auto p-6 mt-10 bg-white shadow-md rounded-2xl">
-            <h2 className="text-2xl font-bold mb-6 text-gray-800">Create a New Group</h2>
+            <h2 className="text-2xl font-bold mb-6 text-blue-500">Create a New Group</h2>
 
             <div className="mb-5">
                 <label className="block text-sm font-medium mb-1 text-gray-700">Group name</label>
