@@ -27,7 +27,7 @@ export default function Login() {
                   <div className="flex justify-center mb-6">
                               <img src={logo} alt="SchoolChat logo" className="h-32 w-auto"/>
                     </div>
-                <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Login</h2>
+                <h2 className="text-2xl font-bold text-center text-gray-800 mb-6  bg-clip-text bg-gradient-to-t from-blue-500 to-purple-500 via-purple-500">Login</h2>
                {error &&
                    <div className="mb-4 p-3 bg-red-100 text-red-600 rounded-md text-sm">
                       {error}
@@ -74,8 +74,7 @@ export default function Login() {
               </div>
   
             </form>
-</div>
-
         </div>
+     </div>
     )
 }
