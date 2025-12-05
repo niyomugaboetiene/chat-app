@@ -96,7 +96,7 @@ export default function CreateGroup () {
            <button 
               onClick={createGroup}
               disabled={!groupName.trim() || selectedUsers.length === 0}
-               className="px-4 py-2 bg-blue-600 text-white rounded disabled:cursor-not-allowed  hover:bg-blue-700 disabled:bg-gray-400"
+               className="px-4 py-2 bg-gradient-to-l from-blue-500 to-blue-300 via-purple-500 hover:scale-105 text-white rounded disabled:cursor-not-allowed  disabled:bg-gray-400"
             >
                 Create Group
             </button>
