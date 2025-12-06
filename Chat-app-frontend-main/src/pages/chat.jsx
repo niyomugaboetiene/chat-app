@@ -26,6 +26,14 @@ export default function Chat() {
     const [unreadCount, setUnreadCount] = useState({});
     // const [unreadMessages, setUnreadMessages] = useState(null);
 
+    const ChangeLanguage = (lang) => {
+      const select = document.querySelector('.goog-te-combo');
+      if (select) {
+        select.value = lang;
+        select.dispatchEvent(new Event('change'));
+      }
+    };
+    
     //count unread messages
    useEffect(() => {
     const fetchUnreadCountsForMessages = async () => {
