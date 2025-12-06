@@ -24,6 +24,11 @@ i18n.use(initReactI18next).init({
         ViewMembers: 'Reba Abanyamuryango',
         WelcomeToChat: 'Urakaza neza ku Ruganiriro',
         Select: 'Hitamo inshuti cyangwa itsinda kugirango utangire kuganira',
+        NewGroupName: 'Izina Rishya',
+        Cancel: 'Kureka',
+        Updating: 'Guhindura....',
+        Update: 'Hindura',
+        EnterNewName: 'Andika izina rishya'
       }
     },
     en: {
@@ -44,6 +49,11 @@ i18n.use(initReactI18next).init({
         ViewMembers: 'View Members',
         WelcomeToChat: 'Welcome to Chat',
         Select: 'Select a contact or group to start messaging',
+        NewGroupName: 'New Group Name',
+        Cancel: 'Cancel',
+        Updating: 'Updaing....',
+        Update: 'Update',
+        EnterNewName: 'Enter new name'
       }
     }
   }
