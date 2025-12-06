@@ -521,8 +521,8 @@ return (
       </div>
 
       <div>
-        <h3 className="px-4 py-3 text-sm font-semibold text-gray-500 bg-gray-50 sticky top-0 z-10">
-          
+        <h3 className="px-4 py-3 text-sm uppercase font-semibold text-gray-500 bg-gray-50 sticky top-0 z-10">
+          {t('contact')}
         </h3>
         <div className="divide-y divide-gray-100">
           {allUsers.map(user => {
@@ -664,13 +664,13 @@ return (
                       isOnline ? 'text-green-600' : 'text-gray-500'
                     }`}
                     >
-                      {isOnline ? 'Online' : 'Offline'}
+                      {isOnline ? `${t('online')}` : `${t('offline')}`}
                     </p>
                   );
                 })()}
               </>
             ) : (
-              <p className="text-xs text-gray-500">{t('group')}</p>
+              <p className="text-xs text-gray-500">{t('groups')}</p>
             )}
           </div>
         </div>

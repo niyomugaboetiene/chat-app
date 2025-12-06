@@ -13,7 +13,10 @@ i18n.use(initReactI18next).init({
         online: "Ku Murongo",
         offline: "Ntago ari kumurongo",
         groups: "Amatsinda",
-        language: "Ururimi"
+        language: "Ururimi",
+        contact: 'Inshuti',
+        leaveGroup: 'Va mwitsinda',
+        NoGroupsYet: 'Nta tsinda rihari'
       }
     },
     en: {
@@ -23,7 +26,10 @@ i18n.use(initReactI18next).init({
         online: "Online",
         offline: "Offline",
         groups: "Groups",
-        language: "Language"
+        language: "Language",
+        contact: 'Contacts',
+        leaveGroup: 'Leave Group',
+        NoGroupsYet: 'No groups yet'
       }
     }
   }
