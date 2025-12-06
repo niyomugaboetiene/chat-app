@@ -115,15 +115,15 @@ const handleSettingSubmit = async (e) => {
 
 
     function formatTimeStamp(timestamp) {
-       const data = new Date(timestamp);
-       return data.toLocaleString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: '2-digit',
-        hour12: false
-      })
+       const date = new Date(timestamp);
+       const year = date.getFullYear();
+       const month = String(date.getMonth() + 1).padStart(2, '0'); 
+       const day = String(date.getDate()).padStart(2, '0');
+       const hour = String(date.getHours()).padStart(2, '0');
+       const minute = String(date.getMinutes()).padStart(2, '0');
+
+      return `${year}-${month}-${day} ${hour}:${minute}`;
+
 } 
 
     if (!user) return <p className="text-center mt-10">Loading.....</p>

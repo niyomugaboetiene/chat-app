@@ -39,7 +39,24 @@ i18n.use(initReactI18next).init({
         GroupMembers: 'Abanyamuryango Bitsinda',
         NoMembers: 'Nta munyamuryango uri muri iri tsinda.',
         Admin: '(Umuyobozi)',
-        Remove: 'Kuramo'
+        Remove: 'Kuramo',
+        MyProfile: 'Umwirondoro Wange'
+        ViewProfilePictute: 'Reba Ifoto Ikuranga'
+        ChangeProfilePicture: 'Hindura Ifoto Ikuranga'
+        Name: 'Izina'
+        Phone: 'Terefone'
+        Role: 'Akamaro'
+        Settings: 'Amagenamiterere'
+        CreatePost: 'Menyesha'
+        RecentPosts: 'Amamenyesha Aherutse'
+        AllUsers: 'Ababyeyi bose'
+        UploadImage: 'Hitamo Ifoto (Optional)',
+        PublishPost: 'Sakaza '
+        EditSettings:
+        OldPassword:
+        NewPassword:
+        Save:
+        NoProfileImageFound:
       }
     },
     en: {
