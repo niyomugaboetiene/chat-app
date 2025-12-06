@@ -512,7 +512,7 @@ return (
                     }
                   }}
                 >
-                  Leave Group
+                  {t('leaveGroup')}
                 </button>
               )}
             </div>
