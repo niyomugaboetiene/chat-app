@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../api";
+import { useTranslation } from "react-i18next";
 
 export default function GroupMember() {
   const { g_id } = useParams();
@@ -15,6 +16,7 @@ export default function GroupMember() {
   const [selectedUserIds, setSelectedUserIds] = useState([]); 
   const [groupInfo, setGroupInfo] = useState(null);
   const [currentUserId, setCurrentUserId] = useState(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchMembers();

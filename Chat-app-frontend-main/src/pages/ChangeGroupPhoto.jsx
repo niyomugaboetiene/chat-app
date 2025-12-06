@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../api";
+import { useTranslation } from "react-i18next";
 
 export default function ChangeGroupPhoto() {
     const { g_id } = useParams();
     const navigate = useNavigate();
     const [photo, setPhoto] = useState(null);
     const [loading, setLoading] = useState(false);
+    const { t } = useTranslation();
 
     const handleChangePhoto = async (e) => {
         e.preventDefault();
@@ -38,12 +40,12 @@ export default function ChangeGroupPhoto() {
 
      return (
        <div className="max-w-md mx-auto mt-20 bg-gray-100 p-6 rounded-lg shadow-md">
-          <h2 className="text-2xl font-semibold mb-6 text-gray-700">Change Group Photo</h2>
+          <h2 className="text-2xl font-semibold mb-6 text-gray-700">{t('ChangeGroupPhoto')}</h2>
 
           <form onSubmit={handleChangePhoto}>
             <div className="mb-6">
                 <label className="block mb-2 text-sm font-medium text-gray-700">
-                    Select new group photo
+                    {t('SelectNewGroupPhoto')}
                 </label>
             <input type="file"
               accept="image/*"
@@ -64,15 +66,14 @@ export default function ChangeGroupPhoto() {
                  className="px-4 py-2 text-sm font-medium text-white bg-blue-600 roundend-md  shadow-sm hover:bg-blue-700 focus:outline-none
                       focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                    {loading ? 'Uploading...' : 'Upload'}
+                    {loading ? 'Updating...' : `${t('Update')}`}
                 </button>
-
                 <button 
                    className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                    disabled={loading}
                    onClick={() => navigate(-1)} // same as navigate to previous page
                 >
-                    Cancel
+                    {t('Cancel')}
                 </button>
             </div>
           </form>

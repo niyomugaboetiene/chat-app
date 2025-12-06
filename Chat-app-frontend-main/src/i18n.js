@@ -28,7 +28,10 @@ i18n.use(initReactI18next).init({
         Cancel: 'Kureka',
         Updating: 'Guhindura....',
         Update: 'Hindura',
-        EnterNewName: 'Andika izina rishya'
+        EnterNewName: 'Andika izina rishya',
+        ChangeGroupPhoto: 'Hindura Ifoto',
+        SelectNewGroupPhoto: 'Hitamo ifoto nshyashya',
+         Back to Chat
       }
     },
     en: {
@@ -53,7 +56,9 @@ i18n.use(initReactI18next).init({
         Cancel: 'Cancel',
         Updating: 'Updaing....',
         Update: 'Update',
-        EnterNewName: 'Enter new name'
+        EnterNewName: 'Enter new name',
+        ChangeGroupPhoto: 'Change Group Photo',
+        SelectNewGroupPhoto: 'Select New Group Photo'
       }
     }
   }
