@@ -434,7 +434,7 @@ return (
         )}
         <div>
           <h2 className="font-bold text-lg text-gray-800">{myName}</h2>
-          <p className="text-xs text-blue-600">Online</p>
+          <p className="text-xs text-blue-600">{t('online')}</p>
         </div>
       </div>
     </div>
@@ -453,8 +453,8 @@ return (
 
     <div className="flex-1 overflow-y-auto">
       <div>
-        <h3 className="px-4 py-3 text-sm font-semibold text-gray-500 bg-gray-50 sticky top-0 z-10">
-          GROUPS
+        <h3 className="px-4 py-3 text-sm font-semibold text-gray-500 bg-gray-50 sticky uppercase top-0 z-10">
+          {t('groups')}
         </h3>
         <div className="divide-y divide-gray-100">
           {group.length === 0 && (
@@ -522,7 +522,7 @@ return (
 
       <div>
         <h3 className="px-4 py-3 text-sm font-semibold text-gray-500 bg-gray-50 sticky top-0 z-10">
-          CONTACTS
+          
         </h3>
         <div className="divide-y divide-gray-100">
           {allUsers.map(user => {
