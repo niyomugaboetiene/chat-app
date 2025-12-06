@@ -188,10 +188,10 @@ export default function Layout () {
                               </div>
                          </div>
                           <div className="absolute right-24 border border-blue-300 p-1 rounded-full">
-                                   <select className="bg-blue-500" onChange={() => ChangeLanguage(e.target.value)}>
+                                   <select className="bg-blue-500" onChange={(e) => ChangeLanguage(e.target.value)}>
                                         <option className="border-none" value="select language" disabled>Select language</option>
                                         <option value="en">English</option>
-                                        <option value="en">Kinyarwanda</option>
+                                        <option value="rw">Kinyarwanda</option>
                                    </select>
                               </div>
 

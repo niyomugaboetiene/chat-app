@@ -5,7 +5,14 @@ import api from '../api';
 // import { X } from 'lucide-react';
 
 const socket = io('http://localhost:4000', { withCredentials: true });
-
+  
+export const ChangeLanguage = (lang) => {
+      const select = document.querySelector('.goog-te-combo');
+      if (select) {
+        select.value = lang;
+        select.dispatchEvent(new Event('change'));
+      }
+    };
 export default function Chat() {
     const [myName, setMyName] = useState('');
     const [allUsers, setAllUsers] = useState([]);
@@ -26,14 +33,8 @@ export default function Chat() {
     const [unreadCount, setUnreadCount] = useState({});
     // const [unreadMessages, setUnreadMessages] = useState(null);
 
-    const ChangeLanguage = (lang) => {
-      const select = document.querySelector('.goog-te-combo');
-      if (select) {
-        select.value = lang;
-        select.dispatchEvent(new Event('change'));
-      }
-    };
-    
+
+
     //count unread messages
    useEffect(() => {
     const fetchUnreadCountsForMessages = async () => {
