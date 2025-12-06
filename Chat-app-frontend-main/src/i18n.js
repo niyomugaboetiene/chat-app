@@ -62,6 +62,9 @@ i18n.use(initReactI18next).init({
         ForgotPassword: 'Wibagiwe ijambo banga',
         DontYouHaveAccount: 'Ufite konti',
         CreateAccount: 'Fingura konti',
+        Home: 'Ahabanza',
+        Messages: 'Ubutumwa',
+        Notification: 'Amatangazo'
       }
     },
     en: {
@@ -120,6 +123,9 @@ i18n.use(initReactI18next).init({
         ForgotPassword: 'Forgot Password',
         DontYouHaveAccount: 'Do you have account',
         CreateAccount: 'Create Account',
+        Home: 'Home',
+        Messages: 'Messages',
+        Notification: 'Notification'
       }
     }
   }

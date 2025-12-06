@@ -1,6 +1,7 @@
 import { Outlet, Link, useNavigate, useLocation } from "react-router-dom";
 import  { FaHome, FaEnvelope, FaBell, FaUserCircle } from "react-icons/fa";
 import api from "../api";
+import { useTranslation } from "react-i18next";
 import i18n from "../i18n.js";
 import { useEffect, useState } from "react";
 
@@ -18,6 +19,7 @@ export default function Layout () {
 
         const navigate = useNavigate();
         const location = useLocation();
+        const  { t } = useTranslation();
 
         //fetch unread notification count 
         useEffect(() => {
@@ -166,10 +168,10 @@ export default function Layout () {
                               
                               <div className="flex items-center gap-8 justify-center absolute right-72 left-0">
                                    <Link className="flex items-center gap-1 text-lg hover:text-gray-200 text-pretty transition-colors" to="/dashboard">
-                                        <FaHome/> Home
+                                        <FaHome/> {t('Home')}
                                    </Link>
                                    <Link className="relative flex items-center gap-1 text-lg hover:text-gray-200 text-pretty transition-colors" to="/chat">
-                                        <FaEnvelope /> Messages
+                                        <FaEnvelope /> {t('Messages')}
                                         {unreadMessages > 0 && (
                                              <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">
                                                   {unreadMessages}
@@ -178,7 +180,7 @@ export default function Layout () {
                                    </Link>
 
                                    <Link className="relative flex text-lg items-center gap-1 hover:text-gray-200 text-pretty transition-colors" to="/notifications">
-                                        <FaBell/> Notification
+                                        <FaBell/> {t('Notification')}
                                         {unreadNotifications > 0 && (
                                              <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">
                                                   {unreadNotifications}
