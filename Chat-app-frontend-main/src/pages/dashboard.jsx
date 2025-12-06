@@ -294,7 +294,7 @@ const handleSettingSubmit = async (e) => {
                             <p className="font-semibold text-gray-900 capitalize">
                               {post.name} <span className="font-semibold text-gray-600 text-sm">({post.role})</span>
                             </p>
-                           <span className="text-xs text-gray-500 absolute right-[520px]">
+                           <span className="text-xs text-gray-800 absolute right-[260px] bg-yellow-100 p-1 rounded-full px-2 ">
                               {formatTimeStamp(post.created_at)}
                           </span>
                         </div> 
