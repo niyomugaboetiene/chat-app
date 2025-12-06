@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import { useEffect } from "react";
 import  { FaCamera } from "react-icons/fa";
 import { FaTimes } from "react-icons/fa";
+import { t } from "i18next";
 
 export default function Dashboard() {
     const [user, setUser] = useState("");
@@ -132,7 +133,7 @@ const handleSettingSubmit = async (e) => {
  <div className="min-h-screen flex -mt-20">
 <aside className="w-64 bg-white p-6 border-r border-gray-200 shadow-sm fixed top-20 left-0 bottom-0 z-10 overflow-y-auto">
 
-    <h2 className="text-xl font-semibold text-gray-800 mb-6">My Profile</h2>
+<h2 className="text-xl font-semibold text-gray-800 mb-6">{t('MyProfile')}</h2>
 
 <div className="mb-8">
 
@@ -164,13 +165,13 @@ const handleSettingSubmit = async (e) => {
             }}
              className="w-full px-4 py-2 hover:bg-gray-100 text-left"
             >
-                View Profile Pictute
+                {t('ViewProfilePictute')}
             </button>
 
             <label htmlFor="profileUpload"
               className="w-full block px-4 py-2 hover:bg-gray-100 text-left cursor-pointer"
             >
-                Change Profile Picture
+                {t('ChangeProfilePicture')}
             </label>
         </div>
     )}
@@ -222,15 +223,15 @@ const handleSettingSubmit = async (e) => {
   <div className="space-y-3 text-sm text-gray-700">
 
     <div className="flex flex-col items-start">
-      <span className="text-xs font-medium text-gray-500">Name</span>
+      <span className="text-xs font-medium text-gray-500">{t('Name')}</span>
       <span className="font-medium">{user.name}</span>
     </div>
     <div className="flex flex-col items-start">
-      <span className="text-xs font-medium text-gray-500">Phone</span>
+      <span className="text-xs font-medium text-gray-500">{t('Phone')}</span>
       <span className="font-medium">{user.phone}</span>
     </div>
     <div className="flex flex-col items-start">
-      <span className="text-xs font-medium text-gray-500">Role</span>
+      <span className="text-xs font-medium text-gray-500">{t('Role')}</span>
       <span className="font-medium capitalize">{user.role}</span>
     </div>
   </div>
@@ -248,7 +249,8 @@ const handleSettingSubmit = async (e) => {
   >
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.25 3c.41 0 .75.34.75.75v.82a7.5 7.5 0 012.49.77l.58-.58a.75.75 0 111.06 1.06l-.58.58c.4.74.7 1.54.86 2.39h.82a.75.75 0 010 1.5h-.82a7.53 7.53 0 01-.86 2.39l.58.58a.75.75 0 11-1.06 1.06l-.58-.58a7.5 7.5 0 01-2.49.77v.82a.75.75 0 01-1.5 0v-.82a7.5 7.5 0 01-2.49-.77l-.58.58a.75.75 0 11-1.06-1.06l.58-.58a7.53 7.53 0 01-.86-2.39h-.82a.75.75 0 010-1.5h.82a7.53 7.53 0 01.86-2.39l-.58-.58a.75.75 0 111.06-1.06l.58.58a7.5 7.5 0 012.49-.77v-.82c0-.41.34-.75.75-.75z" />
   </svg>
-  Settings
+
+  {t('Settings')}
 </button>
 
 </div>
@@ -264,14 +266,14 @@ const handleSettingSubmit = async (e) => {
               onClick={() => setShowPostForm(true)}
               className="mb-4 px-4 py-2 bg-gradient-to-l from-blue-500 to-blue-300 via-purple-500 hover:scale-105 text-white rounded"
             >
-                Create Post
+                {t('CreatePost')}
             </button>
           )} 
            </div>
 
 
               <h2 className="text-xl font-semibold text-gray-700 border-b border-gray-200 pb-2 px-1">
-                Recent Posts
+                {t('RecentPosts')}
              </h2>
 
               {post.map((post) => {
@@ -314,7 +316,7 @@ const handleSettingSubmit = async (e) => {
   </main>
 
              <aside className="w-64 bg-gray-50 p-4 border-1 shadow-sm overflow-y-auto fixed top-20 right-0 h-full z-10">
-                <h2 className="text-lg font-bold mb-4 text-gray-700">All Users</h2>
+                <h2 className="text-lg font-bold mb-4 text-gray-700">{t('AllUsers')}</h2>
                 <ul className="space-y-2">
                     {allUsers.map((u) => (
                         <li key={u.phone}>
@@ -393,7 +395,7 @@ const handleSettingSubmit = async (e) => {
                 encType="multipart/form-data"
             >
          
-                <h3 className="text-sm font-semibold text-gray-700">Create Post</h3>
+                <h3 className="text-sm font-semibold text-gray-700">{t('CreatePost')}</h3>
                 
                 <textarea 
                     value={content}
@@ -403,7 +405,7 @@ const handleSettingSubmit = async (e) => {
                 ></textarea>
 
                 <div className="flex flex-col items-start w-full">
-                    <label className="text-xs font-medium text-gray-600 mb-1">Upload Image (Optional)</label>
+                    <label className="text-xs font-medium text-gray-600 mb-1">{t('UploadImage')}</label>
                     <input 
                         type="file" 
                         onChange={(e) => setImage(e.target.files[0])}
@@ -417,7 +419,7 @@ const handleSettingSubmit = async (e) => {
                     className={`w-full  text-white px-4 py-2 rounded text-sm font-medium  focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-blue-500 mt-2
                                ${!content && !image ? "bg-gray-400 cursor-not-allowed" : "bg-gradient-to-l from-blue-500 to-blue-300 via-purple-500 hover:scale-105 text-white"}`}
                 >
-                    Publish Post
+                    {t('PublishPost')}
                 </button>
             </form>
         </div>
@@ -428,7 +430,7 @@ const handleSettingSubmit = async (e) => {
  <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
      <div className="bg-white p-6 rounded shadow-2xl max-w-md w-full">
         <div className="flex justify-between">
-             <h3 className="text-lg font-semibold mb-4 text-gray-600">Edit Settings</h3>
+             <h3 className="text-lg font-semibold mb-4 text-gray-600">{t('EditSettings')}</h3>
                <button 
                   onClick={() => setShowSettingModal(false)}
                   className=" px-4 py-2 text-red-500 rounded hover:text-red-600 font-bold text-xcls
@@ -439,28 +441,29 @@ const handleSettingSubmit = async (e) => {
         </div>
 
         <form onSubmit={handleSettingSubmit}>
-            <label className="block mb-2 text-sm font-medium text-gray-500">Name:</label>
+            <label className="block mb-2 text-sm font-medium text-gray-500">{t('Name')}:</label>
+    
             <input type="text"
                value={name}
                className="w-full px-4 py-2 mb-4 border border-blue-100 rounded focus:outline-blue-500 text-gray-500 font-medium"
                onChange={(e) => setName(e.target.value)}
             />
 
-            <label className="block mb-2 text-sm font-medium text-gray-500">Phone:</label>
+            <label className="block mb-2 text-sm font-medium text-gray-500">{t('Phone')}:</label>
             <input type="text"
               value={phone} 
               className="w-full px-4 py-2 mb-2 border rounded  border-blue-100  focus:outline-blue-500 text-gray-500 font-medium"
               onChange={(e) => setPhone(e.target.value)}
             />
 
-            <label className="block mb-2 text-sm font-medium text-gray-500">Old Password:</label>
+            <label className="block mb-2 text-sm font-medium text-gray-500">{t('OldPassword')}:</label>
             <input type="password"
               placeholder="Type an old password"
               className="w-full px-4 py-2 mb-2 border rounded  border-blue-100 focus:outline-blue-500 text-gray-500 font-medium"
               onChange={(e) => setOldPassword(e.target.value)}
             />
 
-            <label className="block mb-2 text-sm font-medium text-gray-500">New Password:</label>
+            <label className="block mb-2 text-sm font-medium text-gray-500">{t('NewPassword')}:</label>
             <input type="password"
               className="w-full px-4 py-2 mb-2 border rounded  border-blue-100 focus:outline-blue-500 text-gray-500 font-medium"
               onChange={(e) => setNewPassword(e.target.value)}
@@ -472,7 +475,7 @@ const handleSettingSubmit = async (e) => {
              className="bg-gradient-to-l from-blue-500 to-blue-300 via-purple-500 hover:scale-105 text-white px-3 py-2 rounded transition duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed"
                disabled={((!name && !phone && !newPassword))}
             >
-                Save
+                {t('Save')}
         </button>
         </form>
         {message && (
@@ -499,7 +502,8 @@ const handleSettingSubmit = async (e) => {
                   className="w-80 h-auto object-cover border"
                />
             ) : (
-                <p>No profile image found</p>
+                <p>{t('NoProfileImageFound')}</p>
+
             )}
         </div>
      </div>

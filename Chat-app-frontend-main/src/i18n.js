@@ -40,23 +40,23 @@ i18n.use(initReactI18next).init({
         NoMembers: 'Nta munyamuryango uri muri iri tsinda.',
         Admin: '(Umuyobozi)',
         Remove: 'Kuramo',
-        MyProfile: 'Umwirondoro Wange'
-        ViewProfilePictute: 'Reba Ifoto Ikuranga'
-        ChangeProfilePicture: 'Hindura Ifoto Ikuranga'
-        Name: 'Izina'
-        Phone: 'Terefone'
-        Role: 'Akamaro'
-        Settings: 'Amagenamiterere'
-        CreatePost: 'Menyesha'
-        RecentPosts: 'Amamenyesha Aherutse'
-        AllUsers: 'Ababyeyi bose'
-        UploadImage: 'Hitamo Ifoto (Optional)',
-        PublishPost: 'Sakaza '
-        EditSettings:
-        OldPassword:
-        NewPassword:
-        Save:
-        NoProfileImageFound:
+        MyProfile: 'Umwirondoro Wange',
+        ViewProfilePictute: 'Reba Ifoto Ikuranga',
+        ChangeProfilePicture: 'Hindura Ifoto Ikuranga',
+        Name: 'Izina',
+        Phone: 'Terefone',
+        Role: 'Akamaro',
+        Settings: 'Amagenamiterere',
+        CreatePost: 'Menyesha',
+        RecentPosts: 'Amamenyesha Aherutse',
+        AllUsers: 'Ababyeyi bose',
+        UploadImage: 'Hitamo Ifoto (Inyongera)',
+        PublishPost: 'Sakaza',
+        EditSettings: 'Hinduara Amamenyesha',
+        OldPassword: 'IJambo banga risanzwe',
+        NewPassword: 'Ijambo banga rishyashya',
+        Save: 'Bika',
+        NoProfileImageFound: 'Nta foto yabonetse',
       }
     },
     en: {
@@ -92,7 +92,24 @@ i18n.use(initReactI18next).init({
         GroupMembers: 'Group Members',
         NoMembers: 'No members in this group yet.',
         Admin: '(Admin)',
-        Remove: 'Remove'
+        Remove: 'Remove',
+        MyProfile: 'My Profile',
+        ViewProfilePictute: 'View Profile Pictute',
+        ChangeProfilePicture: 'Change Profile Picture',
+        Name: 'Name',
+        Phone: 'Phone',
+        Role: 'Role',
+        Settings: 'Settings',
+        CreatePost: 'Create Post',
+        RecentPosts: 'Recent Posts',
+        AllUsers: 'All Users',
+        UploadImage: 'Upload Image (Optional)',
+        PublishPost: 'Publish Post',
+        EditSettings: 'Edit Settings',
+        OldPassword: 'Old Password',
+        NewPassword: 'New Password',
+        Save: 'Save',
+        NoProfileImageFound: 'No Profile Image Found',
       }
     }
   }
