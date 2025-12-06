@@ -31,15 +31,15 @@ i18n.use(initReactI18next).init({
         EnterNewName: 'Andika izina rishya',
         ChangeGroupPhoto: 'Hindura Ifoto',
         SelectNewGroupPhoto: 'Hitamo ifoto nshyashya',
-        BackToChat: 'Back to Chat'
-        AddMember: 'Add Member'
-        SelectUsersToAdd: 'Select users to Add'
-        NoAvailableUsersToAdd: 'No available users to add'
-        Add: 'Add'
-        GroupMembers: 'Group Members'
-        NoMembers: ''
-        Admin
-        Remove
+        BackToChat: 'Subira inyuma',
+        AddMember: 'Shyiramo ho umunyamuryango',
+        SelectUsersToAdd: 'Hitamo umunyamuryango',
+        NoAvailableUsersToAdd: 'Nta nshuti zihari zo kongera mwitsinda',
+        Add: 'Shyiramo',
+        GroupMembers: 'Abanyamuryango Bitsinda',
+        NoMembers: 'Nta munyamuryango uri muri iri tsinda.',
+        Admin: '(Umuyobozi)',
+        Remove: 'Kuramo'
       }
     },
     en: {
@@ -66,7 +66,16 @@ i18n.use(initReactI18next).init({
         Update: 'Update',
         EnterNewName: 'Enter new name',
         ChangeGroupPhoto: 'Change Group Photo',
-        SelectNewGroupPhoto: 'Select New Group Photo'
+        SelectNewGroupPhoto: 'Select New Group Photo',
+        BackToChat: 'Back to Chat',
+        AddMember: 'Add Member',
+        SelectUsersToAdd: 'Select users to Add',
+        NoAvailableUsersToAdd: 'No available users to add',
+        Add: 'Add',
+        GroupMembers: 'Group Members',
+        NoMembers: 'No members in this group yet.',
+        Admin: '(Admin)',
+        Remove: 'Remove'
       }
     }
   }
