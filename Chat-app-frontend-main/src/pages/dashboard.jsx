@@ -262,7 +262,7 @@ const handleSettingSubmit = async (e) => {
             {['director', 'dos', 'patron', 'matron', 'dod'].includes(user.role) && (
             <button 
               onClick={() => setShowPostForm(true)}
-              className="mb-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+              className="mb-4 px-4 py-2 bg-gradient-to-l from-blue-500 to-blue-300 via-purple-500 hover:scale-105 text-white rounded"
             >
                 Create Post
             </button>
@@ -415,7 +415,7 @@ const handleSettingSubmit = async (e) => {
                     type="submit"
                     disabled={!content && !image}
                     className={`w-full  text-white px-4 py-2 rounded text-sm font-medium  focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-blue-500 mt-2
-                               ${!content && !image ? "bg-gray-400 cursor-not-allowed" : "bg-blue-600 text-white hover:bg-blue-700"}`}
+                               ${!content && !image ? "bg-gray-400 cursor-not-allowed" : "bg-gradient-to-l from-blue-500 to-blue-300 via-purple-500 hover:scale-105 text-white"}`}
                 >
                     Publish Post
                 </button>
@@ -469,7 +469,7 @@ const handleSettingSubmit = async (e) => {
 
             <button
              type="sumbit"
-             className="bg-blue-400 text-white px-3 py-2 rounded hover:bg-blue-300 transition duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed"
+             className="bg-gradient-to-l from-blue-500 to-blue-300 via-purple-500 hover:scale-105 text-white px-3 py-2 rounded transition duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed"
                disabled={((!name && !phone && !newPassword))}
             >
                 Save
