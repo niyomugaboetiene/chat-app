@@ -16,7 +16,8 @@ i18n.use(initReactI18next).init({
         language: "Ururimi",
         contact: 'Inshuti',
         leaveGroup: 'Va mwitsinda',
-        NoGroupsYet: 'Nta tsinda rihari'
+        NoGroupsYet: 'Nta tsinda rihari',
+        Createdby: 'Yahanzwe na'
       }
     },
     en: {
@@ -29,7 +30,8 @@ i18n.use(initReactI18next).init({
         language: "Language",
         contact: 'Contacts',
         leaveGroup: 'Leave Group',
-        NoGroupsYet: 'No groups yet'
+        NoGroupsYet: 'No groups yet',
+        Createdby: 'Created By'
       }
     }
   }

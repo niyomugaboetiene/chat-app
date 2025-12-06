@@ -458,7 +458,7 @@ return (
         </h3>
         <div className="divide-y divide-gray-100">
           {group.length === 0 && (
-            <p className="text-xs text-gray-400 px-4 py-2">{t('')}</p>
+            <p className="text-xs text-gray-400 px-4 py-2">{t('NoGroupsYet')}</p>
           )}
           {group.map(groupItem => (
             <div 
@@ -489,7 +489,7 @@ return (
 
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-gray-900 truncate">{groupItem.group_name}</p>
-                <p className="text-xs text-gray-500 truncate">Created by {groupItem.creator_name}</p>
+                <p className="text-xs text-gray-500 truncate">{t('Createdby')} {groupItem.creator_name}</p>
               </div>
               {showDeleteMenuForGroup === groupItem.g_id && (
                 <button
