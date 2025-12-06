@@ -1,0 +1,30 @@
+import i18n from "i18next"
+import { initReactI18next } from "react-i18next"
+
+i18n.use(initReactI18next).init({
+    lng: 'rw',
+    fallbackLng: 'rw',
+
+    resources: {
+        translation: {
+            create_group: 'Hanga Itsinda',
+            send: 'Ohereza',
+            online: 'Ku Murongo',
+            offline: 'Ntago ari kumurongo',
+            groups: 'Amatsinda',
+            language: 'Ururimi'
+        }
+    },
+    en: {
+        translation: {
+            create_group: 'Create Group',
+            send: 'Send',
+            online: 'Online',
+            offline: 'Offline',
+            groups: 'Groups',
+            language: 'Language'
+        }
+    }
+})
+
+export default i18n;
