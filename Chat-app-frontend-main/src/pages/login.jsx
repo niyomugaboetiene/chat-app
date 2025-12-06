@@ -32,13 +32,6 @@ export default function Login() {
                    <h2 className="text-2xl font-bold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-tr from-blue-500 to-blue-300 via-purple-500">
                          {t('Login')}
                   </h2>
-                  {/* 
-                         Login: 'Login',
-        password: 'Password',
-        ForgotPassword: 'Forgot Password',
-        DontYouHaveAccount: 'Do you have account',
-        CreateAccount:
-                  */}
                   {error &&
                    <div className="mb-4 p-3 bg-red-100 text-red-600 rounded-md text-sm">
                       {error}
