@@ -186,6 +186,13 @@ export default function Layout () {
                                    </Link>
                               </div>
                          </div>
+                          <div className="absolute right-24 border border-blue-300 p-1 rounded-full">
+                                   <select className="bg-blue-500">
+                                        <option className="border-none" value="select language" disabled>Select language</option>
+                                        <option value="en">English</option>
+                                        <option value="en">Kinyarwanda</option>
+                                   </select>
+                              </div>
 
                          <button className="relative group bg-white text-blue-500 p-1 rounded-full
                                              font-semibold flex items-center justify-center hover:ring-2 hover:ring-blue-400 transition-all duration-200"
