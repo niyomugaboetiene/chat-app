@@ -670,7 +670,7 @@ return (
                 })()}
               </>
             ) : (
-              <p className="text-xs text-gray-500">Group</p>
+              <p className="text-xs text-gray-500">{t('group')}</p>
             )}
           </div>
         </div>
