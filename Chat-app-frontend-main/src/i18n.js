@@ -23,7 +23,7 @@ i18n.use(initReactI18next).init({
         DeleteGroup: 'Siba Itsinda',
         ViewMembers: 'Reba Abanyamuryango',
         WelcomeToChat: 'Urakaza neza ku Ruganiriro',
-        Select: 'Hitamo inshuti cyangwa itsinda kugirango utangire ubutumwa',
+        Select: 'Hitamo inshuti cyangwa itsinda kugirango utangire kuganira',
       }
     },
     en: {
@@ -38,12 +38,12 @@ i18n.use(initReactI18next).init({
         leaveGroup: 'Leave Group',
         NoGroupsYet: 'No groups yet',
         Createdby: 'Created By',
-        ChangeGroupName: 'Hinduara Izina',
-        ChangeGroupPhoto: 'Hindura Ifoto',
-        DeleteGroup: 'Siba Itsinda',
-        ViewMembers: 'Reba Abanyamuryango',
-        WelcomeToChat: 'Urakaza neza ku Ruganiriro',
-        Select: 'Hitamo inshuti cyangwa itsinda kugirango utangire ubutumwa',
+        ChangeGroupName: 'Change Group Name',
+        ChangeGroupPhoto: 'Change Group Photo',
+        DeleteGroup: 'Delete Group',
+        ViewMembers: 'View Members',
+        WelcomeToChat: 'Welcome to Chat',
+        Select: 'Select a contact or group to start messaging',
       }
     }
   }

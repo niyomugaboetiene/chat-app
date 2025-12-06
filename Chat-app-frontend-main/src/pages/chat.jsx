@@ -621,21 +621,21 @@ return (
                   className="w-full px-4 py-2 text-sm text-left text-gray-700 bg-gray-50 rounded-lg hover:text-blue-600 hover:bg-blue-50 transition-colors"
                   onClick={() => navigate(`/changeGroupName/${selectedGroup.g_id}`)}
                 >
-                  Change group name
+                  {t('ChangeGroupName')}
                 </button>
 
                 <button
                   className="w-full px-4 py-2 text-sm text-left text-gray-700 bg-gray-50 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors"
                   onClick={() => navigate(`/changeGroupPhoto/${selectedGroup.g_id}`)}
                 >
-                  Change group photo
+                  {t('ChangeGroupPhoto')}
                 </button>
     
                 <button
                   className="w-full px-4 py-2 text-sm text-left text-red-600 bg-red-50 rounded-lg hover:bg-red-100 hover:text-red-700 transition-colors"
                   onClick={handleDeleteGroup}
                 >
-                  Delete Group
+                  {t('DeleteGroup')}
                 </button>
               </div>
             )}
@@ -649,7 +649,7 @@ return (
                 className="text-xs text-blue-600 border border-blue-600 px-2 py-0.5 rounded hover:bg-blue-50"
                 onClick={() => navigate(`/group-members/${selectedGroup.g_id}`)}
               >
-                View Members
+                {t('ViewMembers')}
               </button>
             )}
 
@@ -755,7 +755,7 @@ return (
               disabled={!message.trim()}
               className="bg-blue-600 text-white px-5 py-2 rounded-full hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors duration-200 shadow-sm"
             >
-              Send
+              {t('send')}
             </button>
           </form>
         </div>
@@ -767,8 +767,8 @@ return (
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
           </svg>
         </div>
-        <h2 className="text-2xl font-bold text-gray-800 mb-2">Welcome to Chat</h2>
-        <p className="text-gray-600 mb-6">Select a contact or group to start messaging</p>
+        <h2 className="text-2xl font-bold text-gray-800 mb-2">{t('WelcomeToChat')}</h2>
+        <p className="text-gray-600 mb-6">{t('Select')}</p>
         <div className="flex space-x-2">
           <div className="w-3 h-3 bg-blue-600 rounded-full animate-bounce"></div>
           <div className="w-3 h-3 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
