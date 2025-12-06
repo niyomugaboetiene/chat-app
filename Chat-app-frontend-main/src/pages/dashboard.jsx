@@ -314,7 +314,6 @@ const handleSettingSubmit = async (e) => {
       );
      })}
   </main>
-
              <aside className="w-64 bg-gray-50 p-4 border-1 shadow-sm overflow-y-auto fixed top-20 right-0 h-full z-10">
                 <h2 className="text-lg font-bold mb-4 text-gray-700">{t('AllUsers')}</h2>
                 <ul className="space-y-2">
@@ -433,8 +432,7 @@ const handleSettingSubmit = async (e) => {
              <h3 className="text-lg font-semibold mb-4 text-gray-600">{t('EditSettings')}</h3>
                <button 
                   onClick={() => setShowSettingModal(false)}
-                  className=" px-4 py-2 text-red-500 rounded hover:text-red-600 font-bold text-xcls
-                  l"
+                  className=" px-4 py-2 text-red-500 rounded hover:text-red-600 font-bold text-xl"
                 >
                     <FaTimes />
                </button>
