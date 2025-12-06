@@ -28,8 +28,15 @@ export default function Login() {
                               <img src={logo} alt="SchoolChat logo" className="h-32 w-auto"/>
                     </div>
                    <h2 className="text-2xl font-bold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-tr from-blue-500 to-blue-300 via-purple-500">
-                         Login
+                         {t('Login')}
                   </h2>
+                  {/* 
+                         Login: 'Login',
+        password: 'Password',
+        ForgotPassword: 'Forgot Password',
+        DontYouHaveAccount: 'Do you have account',
+        CreateAccount:
+                  */}
                   {error &&
                    <div className="mb-4 p-3 bg-red-100 text-red-600 rounded-md text-sm">
                       {error}
@@ -41,7 +48,7 @@ export default function Login() {
                    <input
                       type="text" 
                       name="phone"
-                      placeholder="Phone" 
+                      placeholder={`${t('phone')}`} 
                       value={phone} 
                       required
                       onChange={(e) => setPhone(e.target.value)}
@@ -53,7 +60,7 @@ export default function Login() {
                    <input 
                       type="password" 
                       name="password" 
-                      placeholder="Password" 
+                    placeholder={`${t('password')}`} 
                       value={password} required
                       onChange={(e) => setPassword(e.target.value)}
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
@@ -61,9 +68,9 @@ export default function Login() {
                 </div>
 
                 <button type="submit"
-                   className="bg-gradient-to-l from-blue-500 to-blue-300 via-purple-500 hover:scale-105 transition duration-200 text-white font-semibold py-2 px-4 rounded-lg transition duration-300"
+                   className="bg-gradient-to-l from-blue-500 to-blue-300 via-purple-500 hover:scale-105  text-white font-semibold py-2 px-4 rounded-lg transition duration-300"
                 >
-                   Login
+                         {t('Login')}
               </button> 
 
               <div>

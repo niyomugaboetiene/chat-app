@@ -57,6 +57,11 @@ i18n.use(initReactI18next).init({
         NewPassword: 'Ijambo banga rishyashya',
         Save: 'Bika',
         NoProfileImageFound: 'Nta foto yabonetse',
+        Login: 'Injira',
+        password: 'Ijambo Banga',
+        ForgotPassword: 'Wibagiwe ijambo banga',
+        DontYouHaveAccount: 'Ufite konti',
+        CreateAccount: 'Fingura konti',
       }
     },
     en: {
@@ -110,6 +115,11 @@ i18n.use(initReactI18next).init({
         NewPassword: 'New Password',
         Save: 'Save',
         NoProfileImageFound: 'No Profile Image Found',
+        Login: 'Login',
+        password: 'Password',
+        ForgotPassword: 'Forgot Password',
+        DontYouHaveAccount: 'Do you have account',
+        CreateAccount: 'Create Account',
       }
     }
   }
