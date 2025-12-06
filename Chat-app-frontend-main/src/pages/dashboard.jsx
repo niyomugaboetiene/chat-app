@@ -4,8 +4,7 @@ import { useState, useRef } from "react";
 import { useEffect } from "react";
 import  { FaCamera } from "react-icons/fa";
 import { FaTimes } from "react-icons/fa";
-import { t } from "i18next";
-
+import { useTranslation } from "react-i18next";
 export default function Dashboard() {
     const [user, setUser] = useState("");
     const [allUsers, setAllUsers] = useState([]);
@@ -19,6 +18,7 @@ export default function Dashboard() {
     const [selectedImage, setSelectedImage] = useState(null); // for showing full image of other users
     const [post, setPost] = useState([]);
     const navigate = useNavigate();
+    const { t } = useTranslation()
 
 
     //for setting customization
