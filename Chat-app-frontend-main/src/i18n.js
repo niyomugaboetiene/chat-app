@@ -31,7 +31,15 @@ i18n.use(initReactI18next).init({
         EnterNewName: 'Andika izina rishya',
         ChangeGroupPhoto: 'Hindura Ifoto',
         SelectNewGroupPhoto: 'Hitamo ifoto nshyashya',
-         Back to Chat
+        BackToChat: 'Back to Chat'
+        AddMember: 'Add Member'
+        SelectUsersToAdd: 'Select users to Add'
+        NoAvailableUsersToAdd: 'No available users to add'
+        Add: 'Add'
+        GroupMembers: 'Group Members'
+        NoMembers: ''
+        Admin
+        Remove
       }
     },
     en: {
