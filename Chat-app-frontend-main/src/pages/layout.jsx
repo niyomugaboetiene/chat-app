@@ -1,7 +1,7 @@
 import { Outlet, Link, useNavigate, useLocation } from "react-router-dom";
 import  { FaHome, FaEnvelope, FaBell, FaUserCircle } from "react-icons/fa";
 import api from "../api";
-import { ChangeLanguage } from "./chat.jsx"
+import i18n from "../i18n.js";
 import { useEffect, useState } from "react";
 
 export default function Layout () {
@@ -188,7 +188,7 @@ export default function Layout () {
                               </div>
                          </div>
                           <div className="absolute right-24 border border-blue-300 p-1 rounded-full">
-                                   <select className="bg-blue-500" onChange={(e) => ChangeLanguage(e.target.value)}>
+                                   <select className="bg-blue-500" onChange={(e) => i18n.changeLanguage(e.target.value)}>
                                         <option className="border-none" value="select language" disabled>Select language</option>
                                         <option value="en">English</option>
                                         <option value="rw">Kinyarwanda</option>
