@@ -3,12 +3,14 @@ import api from "../api.js";
 import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react";
 import logo from "../assets/logo 1.png"
+import { useTranslation } from "react-i18next";
 
 export default function Login() {
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -48,7 +50,7 @@ export default function Login() {
                    <input
                       type="text" 
                       name="phone"
-                      placeholder={`${t('phone')}`} 
+                      placeholder={`${t('Phone')}`} 
                       value={phone} 
                       required
                       onChange={(e) => setPhone(e.target.value)}
@@ -74,12 +76,12 @@ export default function Login() {
               </button> 
 
               <div>
-                <Link to={"#"} className="font-normal text-blue-500 hover:underline">Forgot password</Link>
+                <Link to={"#"} className="font-normal text-blue-500 hover:underline">{t('ForgotPassword')}</Link>
                 <hr className="border-gray-600"/>
 
-                 <p className="font-semibold text-gray-800 mt-2">Dont you have account ?</p>
+                 <p className="font-semibold text-gray-800 mt-2">{t('DontYouHaveAccount')} ?</p>
   
-                <Link to="/register" className="font-normal text-blue-500 hover:underline">Create account</Link>
+                <Link to="/register" className="font-normal text-blue-500 hover:underline">{t('CreateAccount')}</Link>
               </div>
   
             </form>
