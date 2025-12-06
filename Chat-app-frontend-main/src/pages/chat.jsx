@@ -458,7 +458,7 @@ return (
         </h3>
         <div className="divide-y divide-gray-100">
           {group.length === 0 && (
-            <p className="text-xs text-gray-400 px-4 py-2">No groups yet</p>
+            <p className="text-xs text-gray-400 px-4 py-2">{t('')}</p>
           )}
           {group.map(groupItem => (
             <div 
