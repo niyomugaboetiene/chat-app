@@ -461,7 +461,7 @@ return (
           </div>
         )}
         <div>
-          <h2 className="font-bold text-lg text-gray-800">{myName}</h2>
+          <h2 className="font-bold text-lg text-gray-800 capitalize">{myName}</h2>
           <p className="text-xs text-blue-600">{t('online')}</p>
         </div>
       </div>

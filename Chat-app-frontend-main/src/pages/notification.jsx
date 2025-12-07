@@ -103,7 +103,7 @@ export default function Notification () {
                         {n.type === 'profile_update' ? 'Update their profile picture' 
                                                      : n.type === 'New post' ? 'shared a new post' : n.content}
                         
-                        <span className="text-gray-400 text-xs">
+                        <span className="text-gray-400 text-xs ms-1">
                             {new Date(n.created_at).toLocaleTimeString()}
                         </span>
 
