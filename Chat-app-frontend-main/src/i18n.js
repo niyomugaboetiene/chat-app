@@ -2,8 +2,8 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
 i18n.use(initReactI18next).init({
-  lng: "en",         
-  fallbackLng: "rw", 
+  lng: "rw",         
+  fallbackLng: "en", 
 
   resources: {
     rw: {
@@ -64,7 +64,11 @@ i18n.use(initReactI18next).init({
         CreateAccount: 'Fingura konti',
         Home: 'Ahabanza',
         Messages: 'Ubutumwa',
-        Notification: 'Amatangazo'
+        Notification: 'Amatangazo',
+        CreateFreeAccount: 'Fungura Konti',
+        CreateAccount: 'Iyandikishe',
+        BackToMainLogin: 'Subira inyuma',
+        YourFullName: 'Amazina Yombi'
       }
     },
     en: {
@@ -125,7 +129,10 @@ i18n.use(initReactI18next).init({
         CreateAccount: 'Create Account',
         Home: 'Home',
         Messages: 'Messages',
-        Notification: 'Notification'
+        Notification: 'Notification',
+        CreateFreeAccount: 'Create Free Account',
+        BackToMainLogin: 'Back to main Login',
+        YourFullName: 'Your Full Name'
       }
     }
   }
