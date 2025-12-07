@@ -264,7 +264,7 @@ const handleSettingSubmit = async (e) => {
             {['director', 'dos', 'patron', 'matron', 'dod'].includes(user.role) && (
             <button 
               onClick={() => setShowPostForm(true)}
-              className="mb-4 px-4 py-2 bg-gradient-to-l from-blue-500 to-blue-300 via-purple-500 hover:scale-105 text-white rounded"
+              className="mb-4 px-4 py-2 bg-gradient-to-l from-blue-500 to-blue-300 via-purple-500 hover:scale-105 transition duration-200 text-white rounded"
             >
                 {t('CreatePost')}
             </button>
