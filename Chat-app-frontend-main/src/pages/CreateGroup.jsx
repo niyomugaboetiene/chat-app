@@ -81,7 +81,7 @@ export default function CreateGroup () {
                                 onChange={() => toggleUserSelection(user.name)}
                                 className="mr-3 h-4 w-4 text-blue-600 foucs:ring-blue-500"
                             />
-                            <label htmlFor={`user-${user.name}`} className="text-sm hover:bg-gray-300">{user.name}</label>
+                            <label htmlFor={`user-${user.name}`} className="text-sm hover:bg-blue-100 p-2 hover:rounded-lg">{user.name}</label>
                         </div>
                       ))}
                 </div>

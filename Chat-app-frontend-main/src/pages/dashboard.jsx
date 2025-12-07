@@ -280,7 +280,7 @@ const handleSettingSubmit = async (e) => {
               return (
                   <div key={post.post_id} 
   
-                     className={`p-4 border rounded shadow mb-4 bg-gray-50 transition-all duration-300 `}
+                     className={`p-4 border rounded shadow mb-4 bg-gray-50 transition-all duration-300 hover:bg-blue-100`}
                   >
                      <div className="flex items-center gap-2 mb-2">
                         {post.profile_image ? (
