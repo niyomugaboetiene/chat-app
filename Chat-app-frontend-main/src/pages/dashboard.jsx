@@ -258,7 +258,7 @@ const handleSettingSubmit = async (e) => {
 
 </aside>
 
-          <main className="flex-1 ml-64 overflow-y-auto p-6 bg-white h-screen">
+  <main className="flex-1 ml-64 overflow-y-auto p-6 bg-white h-screen">
 
            <div className="sticky -top-6 z-2 mb-4 bg-white py-2">
             {['director', 'dos', 'patron', 'matron', 'dod'].includes(user.role) && (
