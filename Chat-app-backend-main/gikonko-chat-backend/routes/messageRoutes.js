@@ -229,4 +229,27 @@ router.get('/conversations', async (req, res) => {
     }
 });
 
+router.get('/userInfo', async (req, res) => {
+    try {
+        if (!req.session.user) {
+            return res.status(401).json({ message: "Unauthorized" });
+        }
+
+        const sessionUser = req.session.user;
+
+        const [rows] = await pool.query(
+            "SELECT user_id, name, profile_image AS profile_image FROM user WHERE user_id = ?",
+            [sessionUser.id]
+        );
+
+        if (rows.length === 0) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        res.json(rows[0]);
+    } catch (error) {
+        console.error("Error fetching user info:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
 export default router

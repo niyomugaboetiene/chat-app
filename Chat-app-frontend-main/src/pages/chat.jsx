@@ -29,6 +29,7 @@ export default function Chat() {
     const { t } = useTranslation();
 
     const [unreadCount, setUnreadCount] = useState({});
+    const [userInfo, setUserInfo] = useState({});
     // const [unreadMessages, setUnreadMessages] = useState(null);
 
 
@@ -434,10 +435,18 @@ const GetConversation = async () => {
   setLastMessage(map);
 };
 
+const loadUserInfo = async () => {
+  const res = await api.get('/api/messages/userInfo');
+  setUserInfo(res.data);
+};
+
 
 useEffect(() => {
   GetConversation();
-})
+  loadUserInfo()
+}, [])
+
+
 return (
  <div className="flex -mt-16 h-screen">
   <div className="w-1/4 bg-white border-r border-gray-200 flex flex-col overflow-hidden">
@@ -578,9 +587,18 @@ return (
                   <p className={`text-sm text-gray-800 truncate ${hasUnreadCount ? 'font-bold' : 'font-medium'}`}>
                     {user.name}
                   </p>
-                  <div className='text-sm text-gray-500 truncate'>
-                    {lastMessage[user.name]?.content || "No message yet."}
-                  </div>
+  <p className="text-xs text-gray-500 truncate">
+
+    {lastMessage[user.name]
+      ? (
+          lastMessage[user.name].sender_id === userInfo.user_id
+            ? `You: ${lastMessage[user.name].content}`
+            : lastMessage[user.name].content
+        )
+      : "No message yet."
+    }
+
+  </p>
                 </div>
               </div>
             );
