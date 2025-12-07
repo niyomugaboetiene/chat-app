@@ -66,7 +66,6 @@ i18n.use(initReactI18next).init({
         Messages: 'Ubutumwa',
         Notification: 'Amatangazo',
         CreateFreeAccount: 'Fungura Konti',
-        CreateAccount: 'Iyandikishe',
         BackToMainLogin: 'Subira inyuma',
         YourFullName: 'Amazina Yombi'
       }
