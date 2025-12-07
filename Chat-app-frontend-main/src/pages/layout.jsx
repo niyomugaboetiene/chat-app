@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import i18n from "../i18n.js";
 import { useEffect, useState } from "react";
 
+
 export default function Layout () {
 
     // .filter() creates new array that contains only element that pass through the test or meet with specified condition
@@ -189,13 +190,23 @@ export default function Layout () {
                                    </Link>
                               </div>
                          </div>
-                          <div className="absolute right-24 border border-blue-300 p-1 rounded-full">
-                                   <select className="bg-blue-500" onChange={(e) => i18n.changeLanguage(e.target.value)}>
-                                        <option className="border-none" value="select language" disabled>Select language</option>
-                                        <option value="en">English</option>
-                                        <option value="rw">Kinyarwanda</option>
-                                   </select>
-                              </div>
+<div className="absolute right-24 p-1 rounded-full flex items-center gap-2">
+     <span className="text-white text-xl ">🌍</span>
+
+ <div className="border border-blue-300 p-1 rounded-full">
+    <select
+        className="bg-blue-500 text-white outline-none"
+        onChange={(e) => i18n.changeLanguage(e.target.value)}
+    >
+        <option disabled>Select language</option>
+
+        <option value="en">🇬🇧 English</option>
+        <option value="rw">🇷🇼 Kinyarwanda</option>
+    </select>
+ </div>
+
+</div>
+
 
                          <button className="relative group bg-white text-blue-500 p-1 rounded-full
                                              font-semibold flex items-center justify-center hover:ring-2 hover:ring-blue-400 transition-all duration-200"
