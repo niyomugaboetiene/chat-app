@@ -165,4 +165,68 @@ router.patch('/mark-read', async (req, res) => {
     }
 
 })
+
+router.get('/conversations', async (req, res) => {
+    try {
+        const currentUser = req.session.user;
+        if (!currentUser) {
+            return res.status(403).json({ message: "Unauthorized" });
+        }
+
+        const [userData] = await pool.query(
+            "SELECT user_id FROM user WHERE name = ?",
+            [currentUser.name]
+        );
+
+        if (userData.length === 0)
+            return res.status(404).json({ message: "User not found" });
+
+        const currentUserId = userData[0].user_id;
+
+        const [rows] = await pool.query(
+            `
+            SELECT 
+                m.*,
+                u.user_id AS friend_id,
+                u.name AS friend_name,
+                u.image AS friend_image,
+                
+                -- unread count for each chat
+                (SELECT COUNT(*) 
+                 FROM messages 
+                 WHERE sender_id = friend_id 
+                 AND receiver_id = ? 
+                 AND is_read = FALSE 
+                 AND is_deleted = FALSE
+                ) AS unread_count
+
+            FROM messages m
+            JOIN user u
+                ON (CASE 
+                        WHEN m.sender_id = ? THEN m.receiver_id 
+                        ELSE m.sender_id 
+                    END) = u.user_id
+
+            WHERE 
+                m.m_id IN (
+                    SELECT MAX(m_id)
+                    FROM messages
+                    WHERE (sender_id = ? OR receiver_id = ?)
+                    AND is_deleted = FALSE
+                    GROUP BY LEAST(sender_id, receiver_id),
+                             GREATEST(sender_id, receiver_id)
+                )
+            ORDER BY m.created_at DESC
+            `,
+            [currentUserId, currentUserId, currentUserId, currentUserId]
+        );
+
+        res.json(rows);
+
+    } catch (error) {
+        console.error("Error fetching conversations:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
+
 export default router

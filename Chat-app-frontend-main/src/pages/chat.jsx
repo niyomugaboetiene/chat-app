@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import api from '../api';
 // import { X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import axios from 'axios';
 
 const socket = io('http://localhost:4000', { withCredentials: true });
   
@@ -23,6 +24,7 @@ export default function Chat() {
     const [myProfileImage, setMyProfileImage] = useState(null);
     const [userId, setUserId] = useState(null);
     const messagesEndRef = useRef(null);
+    const [lastMessage, setLastMessage] = useState([]);
     const navigate = useNavigate();
     const { t } = useTranslation();
 
@@ -419,6 +421,15 @@ useEffect(() => {
     }
 }, [selectedGroup]);
 
+
+const GetConversation = async() => {
+  const res = await api.get('/api/messages/conversations');
+  setLastMessage(res.data);
+}
+
+useEffect(() => {
+  GetConversation();
+})
 return (
  <div className="flex -mt-16 h-screen">
   <div className="w-1/4 bg-white border-r border-gray-200 flex flex-col overflow-hidden">
