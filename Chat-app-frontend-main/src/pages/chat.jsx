@@ -556,6 +556,7 @@ return (
           {allUsers.map(user => {
             const isSelected = selectedUser === user.name;
             const hasUnreadCount = unreadCount[user.name] > 0;
+            console.log("has unread count", hasUnreadCount);
 
             return (
               <div 
@@ -587,18 +588,16 @@ return (
                   <p className={`text-sm text-gray-800 truncate ${hasUnreadCount ? 'font-bold' : 'font-medium'}`}>
                     {user.name}
                   </p>
-  <p className="text-xs text-gray-500 truncate">
-
-    {lastMessage[user.name]
-      ? (
-          lastMessage[user.name].sender_id === userInfo.user_id
-            ? `You: ${lastMessage[user.name].content}`
-            : lastMessage[user.name].content
-        )
-      : "No message yet."
-    }
-
-  </p>
+                   <p className={`text-xs text-gray-500 truncate ${hasUnreadCount ? 'font-bold' : 'truncate'}`}>
+                      {lastMessage[user.name]
+                        ? (
+                         lastMessage[user.name].sender_id === userInfo.user_id
+                        ? `You: ${lastMessage[user.name].content}`
+                        : lastMessage[user.name].content
+                        )
+                        : "No message yet."
+                      }
+                   </p>
                 </div>
               </div>
             );
