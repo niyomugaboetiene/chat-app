@@ -24,7 +24,7 @@ export default function Chat() {
     const [myProfileImage, setMyProfileImage] = useState(null);
     const [userId, setUserId] = useState(null);
     const messagesEndRef = useRef(null);
-    const [lastMessage, setLastMessage] = useState([]);
+    const [lastMessage, setLastMessage] = useState({});
     const navigate = useNavigate();
     const { t } = useTranslation();
 
@@ -422,10 +422,18 @@ useEffect(() => {
 }, [selectedGroup]);
 
 
-const GetConversation = async() => {
+const GetConversation = async () => {
   const res = await api.get('/api/messages/conversations');
-  setLastMessage(res.data);
-}
+
+  const map = {};
+
+  res.data.forEach(msg => {
+    map[msg.friend_name] = msg; 
+  });
+
+  setLastMessage(map);
+};
+
 
 useEffect(() => {
   GetConversation();
@@ -570,6 +578,9 @@ return (
                   <p className={`text-sm text-gray-800 truncate ${hasUnreadCount ? 'font-bold' : 'font-medium'}`}>
                     {user.name}
                   </p>
+                  <div className='text-sm text-gray-500 truncate'>
+                    {lastMessage[user.name]?.content || "No message yet."}
+                  </div>
                 </div>
               </div>
             );

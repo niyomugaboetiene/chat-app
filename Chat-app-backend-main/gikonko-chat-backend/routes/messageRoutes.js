@@ -189,7 +189,7 @@ router.get('/conversations', async (req, res) => {
                 m.*,
                 u.user_id AS friend_id,
                 u.name AS friend_name,
-                u.image AS friend_image,
+                u.profile_image AS friend_image,
                 
                 -- unread count for each chat
                 (SELECT COUNT(*) 
