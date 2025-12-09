@@ -80,7 +80,7 @@ export default function Register() {
                     {t('CreateAccount')}
                 </button>  
             </form>
-            <Link to="/" className="font-normal text-blue-500 hover:underline">{t('BackToMainLogin')}</Link>      
+            <Link onClick={() => navigate(-1)} className="font-normal text-blue-500 hover:underline">{t('BackToMainLogin')}</Link>      
             </div>
             </div>
         </div>
