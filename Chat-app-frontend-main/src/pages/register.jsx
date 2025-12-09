@@ -41,13 +41,9 @@ const handleSubmit = async (e) => {
     }
 
     try {
-        if (
-            user.data.role !== 'director' &&
-            user.data.role !== 'dos' &&
-            user.data.role !== 'patron' &&
-            user.data.role !== 'matron' &&
-            user.data.role !== 'dod'
-        ) {
+        const Allowed = ['director', 'dos', 'patron', 'matron', 'dod'];
+        console.log('User role', user.role)
+        if (Allowed.includes(user.role)) {
             await api.post('/api/auth/register', form);
             alert('Registered Successfully');
             navigate('/');
@@ -55,7 +51,7 @@ const handleSubmit = async (e) => {
             setError("You are not allowed to create Account. Ask school for more details");
         }
     } catch(err) {
-        setError(err.response?.data?.message || "You are not allowed to create Account. Ask school for more details");
+        setError(err.response?.data?.message || "Error during registration");
     }
 };
 
