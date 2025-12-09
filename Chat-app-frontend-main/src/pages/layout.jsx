@@ -265,7 +265,7 @@ export default function Layout () {
                                                      
                                        <button
                                              type="button"
-                                             onClick={handleLogout}
+                                             onClick={() => navigate('/register')}
                                              className="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors
                                                          duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 text-sm font-semibold"
                                         >
