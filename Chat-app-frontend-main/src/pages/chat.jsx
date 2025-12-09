@@ -443,6 +443,9 @@ const loadUserInfo = async () => {
 
 useEffect(() => {
   GetConversation();
+}, [])
+
+useEffect(() => {
   loadUserInfo()
 }, [])
 
