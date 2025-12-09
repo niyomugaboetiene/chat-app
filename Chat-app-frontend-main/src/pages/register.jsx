@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../api";
 import logo from "../assets/logo 1.png"
@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 export default function Register() {
     const [form, setForm] = useState({ name: '', phone: '', password: '' });
     const [error, setError] = useState('');
+    const [user, setUser] = useState([]);
     const navigate = useNavigate();
     const { t } = useTranslation();
 
@@ -29,6 +30,18 @@ export default function Register() {
             setError(err.response?.data?.message || "Error in registration")
         }
     }
+
+         // fetch user profile first   
+    useEffect(() => {
+        api.get("/api/auth/profile")
+        .then((res) => {
+            console.log("Profile", res.data);
+            setUser(res.data);
+
+        }).catch(() => {
+            navigate("/");
+        })
+       }, []);
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
