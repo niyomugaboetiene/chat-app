@@ -12,6 +12,7 @@ export default function Layout () {
         const [showUserMenu, setShowUserMenu] = useState(false);
         const [profileImage, setProfileImage] = useState(null);
         const [selectedFile, setSelectedFile] = useState(null);
+        const [isAllowed, setIsAllowed] = useState(false);
 
         //handling badges
         const [unreadMessages, setUnreadMessages] = useState(0);
@@ -145,7 +146,12 @@ export default function Layout () {
                 alert("logout failed");
             }
         }
-
+       useEffect(() => {
+          if (user && user.role) {
+             const Allowed = ['director', 'dos', 'patron', 'matron', 'dod'];
+             setIsAllowed(Allowed.includes(user.role));
+           }
+       }, [user]);
 
         // reset badge count when user click on visit the page
 
@@ -190,10 +196,10 @@ export default function Layout () {
                                    </Link>
                               </div>
                          </div>
-<div className="absolute right-24 p-1 rounded-full flex items-center gap-2">
-     <span className="text-white text-xl ">🌍</span>
+               <div className="absolute right-24 p-1 rounded-full flex items-center gap-2">
+                 <span className="text-white text-xl ">🌍</span>
 
- <div className="border border-blue-300 p-1 rounded-full">
+                 <div className="border border-blue-300 p-1 rounded-full">
                     <select
                        className="bg-blue-500 text-white outline-none"
                        onChange={(e) => i18n.changeLanguage(e.target.value)}
@@ -252,15 +258,15 @@ export default function Layout () {
                                         >
                                              Logout
                                         </button>
-                                    <button type="submit"
+                                    <button type="submit" 
                                              className="w-full from-blue-500 to-blue-300 via-purple-500 hover:scale-105  bg-gradient-to-tl text-white px-4 py-2 rounded-md
                                                          transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 text-sm font-semibold"
                                         >
                                              Upload
                                         </button>
                                         </div>
-
-                                        {user.role}  
+ 
+                                    {isAllowed && (
                                        <button
                                              type="button"
                                              onClick={() => navigate('/register')}
@@ -269,6 +275,7 @@ export default function Layout () {
                                         >
                                              Create Parent Account
                                         </button>  
+                                    )}
                                    </div>
                               </form>
                          </div>
