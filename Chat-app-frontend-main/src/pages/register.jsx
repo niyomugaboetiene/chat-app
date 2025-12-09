@@ -23,10 +23,13 @@ export default function Register() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            if (user.data.role !== 'director' || user.data.role !== 'dos' || user.data.role !== 'patron'  || user.data.role !== 'matron' || user.data.role !== 'dod')
-            await api.post('/api/auth/register', form);
-            alert('Registered Successfully');
-            navigate('/');
+            if (user.data.role !== 'director' || user.data.role !== 'dos' || user.data.role !== 'patron'  || user.data.role !== 'matron' || user.data.role !== 'dod') {
+               await api.post('/api/auth/register', form);
+               alert('Registered Successfully');
+               navigate('/');
+            } else {
+                setError("You are not allowed to create Account. Ask school for more details");
+            }
         } catch(err) {
             setError(err.response?.data?.message || "Error in registration")
         }
