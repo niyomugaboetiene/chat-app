@@ -256,8 +256,8 @@ export default function Layout () {
                                              Logout
                                         </button>
                                     <button type="submit"
-                                             className="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700
-                                                         transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 text-sm font-semibold"
+                                             className="w-full from-blue-500 to-blue-300 via-purple-500 hover:scale-105  bg-gradient-to-tl text-white px-4 py-2 rounded-md
+                                                         transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 text-sm font-semibold"
                                         >
                                              Upload
                                         </button>
@@ -266,8 +266,8 @@ export default function Layout () {
                                        <button
                                              type="button"
                                              onClick={() => navigate('/register')}
-                                             className="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors
-                                                         duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 text-sm font-semibold"
+                                             className="w-full from-blue-500 to-blue-300 via-purple-500 hover:scale-105  bg-gradient-to-tl text-white px-4 py-2 rounded-md transition duration-200
+                                                        focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 text-sm font-semibold"
                                         >
                                              Create Parent Account
                                         </button>  
