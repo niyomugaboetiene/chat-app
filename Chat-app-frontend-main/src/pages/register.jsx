@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 export default function Register() {
     const [form, setForm] = useState({ name: '', phone: '', password: '' });
     const [error, setError] = useState('');
-    const [user, setUser] = useState([]);
+    const [user, setUser] = useState(null);
     const navigate = useNavigate();
     const { t } = useTranslation();
 
@@ -20,22 +20,7 @@ export default function Register() {
       setForm({...form, [e.target.name]: e.target.value});
     }
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            if (user.data.role !== 'director' || user.data.role !== 'dos' || user.data.role !== 'patron'  || user.data.role !== 'matron' || user.data.role !== 'dod') {
-               await api.post('/api/auth/register', form);
-               alert('Registered Successfully');
-               navigate('/');
-            } else {
-                setError("You are not allowed to create Account. Ask school for more details");
-            }
-        } catch(err) {
-            setError(err.response?.data?.message || "Error in registration")
-        }
-    }
-
-         // fetch user profile first   
+             // fetch user profile first   
     useEffect(() => {
         api.get("/api/auth/profile")
         .then((res) => {
@@ -46,6 +31,35 @@ export default function Register() {
             navigate("/");
         })
        }, []);
+
+const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!user || !user.role) {
+        setError("Please wait... loading profile");
+        return; 
+    }
+
+    try {
+        if (
+            user.data.role !== 'director' &&
+            user.data.role !== 'dos' &&
+            user.data.role !== 'patron' &&
+            user.data.role !== 'matron' &&
+            user.data.role !== 'dod'
+        ) {
+            await api.post('/api/auth/register', form);
+            alert('Registered Successfully');
+            navigate('/');
+        } else {
+            setError("You are not allowed to create Account. Ask school for more details");
+        }
+    } catch(err) {
+        setError(err.response?.data?.message || "You are not allowed to create Account. Ask school for more details");
+    }
+};
+
+
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
