@@ -74,7 +74,6 @@ export default function Login() {
 
                  <p className="font-semibold text-gray-800 mt-2">{t('DontYouHaveAccount')} ?</p>
   
-                <Link to="/register" className="font-normal text-blue-500 hover:underline">{t('CreateAccount')}</Link>
               </div>
             </form>
         </div>
